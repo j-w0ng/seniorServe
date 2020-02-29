@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/seniorServe
+    username: postgres
+    password: Password1
+    pool-size: 30
