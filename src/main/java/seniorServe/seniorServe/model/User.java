@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 
-public class User {
+public class User
+{
     private final String username;
     @NotBlank
     private final String firstName;
@@ -16,7 +17,8 @@ public class User {
                 @JsonProperty("firstName") String firstName,
                 @JsonProperty("lastName") String lastName,
                 @JsonProperty("postalCode") String postalCode,
-                @JsonProperty("address") String address) {
+                @JsonProperty("address") String address)
+    {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,23 +26,28 @@ public class User {
         this.address = address;
     }
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return this.username;
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return this.firstName;
     }
 
-    public String getLastName() {
+    public String getLastName()
+    {
         return lastName;
     }
 
-    public String getPostalCode() {
+    public String getPostalCode()
+    {
         return postalCode;
     }
 
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 }

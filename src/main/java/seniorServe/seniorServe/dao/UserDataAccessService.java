@@ -5,27 +5,32 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.User;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Repository("userDaoPostgres")
-public class UserDataAccessService implements UserDao {
+public class UserDataAccessService implements UserDao
+{
     private final JdbcTemplate jdbcTemplate;
 
-    public UserDataAccessService(JdbcTemplate jdbcTemplate) {
+    public UserDataAccessService(JdbcTemplate jdbcTemplate)
+    {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public int insertUser(String username, User user) {
-        User u = new User(username, user.getFirstName(), user.getLastName(), user.getPostalCode(), user.getAddress());
-        String sql = "INSERT INTO Users (Username, First_Name, Last_Name, PostalCode, Address) VALUES('"
-                + u.getUsername() + "', '" + u.getFirstName() + "', '" + u.getLastName() + "', '" + u.getPostalCode() + "', " +  "'" + u.getAddress() + "'" + ");";
-        return jdbcTemplate.update(sql);
+    public int insertUser(String username, User user)
+    {
+        String query = QueryHelper.insertQuery("users",
+                Arrays.asList("Username", "First_Name", "Last_Name", "PostalCode", "Address"),
+                Arrays.asList(user.getUsername(), user.getFirstName(), user.getLastName(), user.getPostalCode(), user.getAddress()));
+        return jdbcTemplate.update(query);
     }
 
     @Override
-    public List<User> selectAllUsers() {
+    public List<User> selectAllUsers()
+    {
         String query = "SELECT * FROM users;";
         return jdbcTemplate.query(query, (resultSet, i) ->
                 new User(resultSet.getString("Username"),
@@ -36,7 +41,8 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public Optional<User> selectUserByUsername(String username) {
+    public Optional<User> selectUserByUsername(String username)
+    {
         String query = "SELECT * FROM users WHERE username = '" + username + "';";
         User user = jdbcTemplate.queryForObject(query, new Object[]{}, (resultSet, i) ->
                 new User(resultSet.getString("Username"),
@@ -48,12 +54,19 @@ public class UserDataAccessService implements UserDao {
     }
 
     @Override
-    public int deleteUser(String username) {
-        return 0;
+    public int deleteUser(String username)
+    {
+        String query = "DELETE FROM users WHERE username = '" + username + "';";
+        return jdbcTemplate.update(query);
     }
 
     @Override
-    public int updateUser(String username, User user) {
-        return 0;
+    public int updateUser(String username, User user)
+    {
+        String query = QueryHelper.updateQuery("users",
+                Arrays.asList("First_Name", "Last_Name", "PostalCode", "Address"),
+                Arrays.asList(user.getFirstName(), user.getLastName(), user.getPostalCode(), user.getAddress()),
+                "username = '" + username + "'");
+        return jdbcTemplate.update(query);
     }
 }

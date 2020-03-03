@@ -16,32 +16,38 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService)
+    {
         this.userService = userService;
     }
 
     @PostMapping
-    public void addUser(@Valid @NonNull @RequestBody User user) {
+    public void addUser(@Valid @NonNull @RequestBody User user)
+    {
         userService.addUser(user);
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<User> getUsers()
+    {
         return userService.getAllUsers();
     }
 
     @GetMapping(path = "{username}")
-    public User getUserByUsername(@PathVariable("username") String username) {
+    public User getUserByUsername(@PathVariable("username") String username)
+    {
         return userService.getUserByUsername(username).orElse(null);
     }
 
     @DeleteMapping(path = "{username}")
-    public void deleteUser(@PathVariable("username") String username) {
+    public void deleteUser(@PathVariable("username") String username)
+    {
         userService.deleteUser(username);
     }
 
     @PutMapping(path = "{username}")
-    public void updateUser(@PathVariable("username") String username, @Valid @NonNull @RequestBody User user) {
+    public void updateUser(@PathVariable("username") String username, @Valid @NonNull @RequestBody User user)
+    {
         userService.updateUser(username, user);
     }
 }
