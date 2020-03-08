@@ -4,7 +4,6 @@ import seniorServe.seniorServe.model.Task;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface TaskDao {
 
@@ -17,5 +16,5 @@ public interface TaskDao {
 
     List<Task> selectAllTask();
 
-    Optional<Task> selectTaskByID(int task_ID);
+    Task selectTaskByID(int task_ID);
 }

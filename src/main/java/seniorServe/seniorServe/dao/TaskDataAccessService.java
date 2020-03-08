@@ -1,5 +1,6 @@
 package seniorServe.seniorServe.dao;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.Task;
@@ -7,7 +8,6 @@ import seniorServe.seniorServe.model.Task;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Repository("taskPostgres")
 public class TaskDataAccessService implements TaskDao {
@@ -44,32 +44,17 @@ public class TaskDataAccessService implements TaskDao {
     @Override
     public List<Task> selectAllTask() {
         String sqlQuery = "SELECT * FROM Task;";
-        return jdbcTemplate.query(sqlQuery, (resultSet, i) ->
-                new Task(resultSet.getInt("Task_ID"),
-                        resultSet.getDate("Date"),
-                        resultSet.getString("Description"),
-                        resultSet.getInt("Num_Volunteer"),
-                        resultSet.getString("Status"),
-                        resultSet.getString("PostalCode"),
-                        resultSet.getString("Address"),
-                        resultSet.getString("Username"),
-                        resultSet.getDate("CreateTime")));
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskRowMapper);
     }
 
     @Override
-    public Optional<Task> selectTaskByID(int task_ID) {
-        String sqlQuery = "SELECT * FROM Task WHERE Task_ID = " + task_ID + ";";
-        Task task = jdbcTemplate.queryForObject(sqlQuery, new Object[]{}, (resultSet, i) ->
-                new Task(resultSet.getInt("Task_ID"),
-                        resultSet.getDate("Date"),
-                        resultSet.getString("Description"),
-                        resultSet.getInt("Num_Volunteer"),
-                        resultSet.getString("Status"),
-                        resultSet.getString("PostalCode"),
-                        resultSet.getString("Address"),
-                        resultSet.getString("Username"),
-                        resultSet.getDate("CreateTime")));
-        return Optional.ofNullable(task);
+    public Task selectTaskByID(int task_ID) {
+        try {
+            String sqlQuery = "SELECT * FROM Task WHERE Task_ID = " + task_ID + ";";
+            return jdbcTemplate.queryForObject(sqlQuery, new Object[]{}, CustomRowMapper::TaskRowMapper);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
     }
 
     private List<String> getTaskValues(Task task) {

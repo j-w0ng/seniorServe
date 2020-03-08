@@ -7,7 +7,6 @@ import seniorServe.seniorServe.dao.TaskDao;
 import seniorServe.seniorServe.model.Task;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -27,7 +26,7 @@ public class TaskService {
         return taskDao.selectAllTask();
     }
 
-    public Optional<Task> getTaskByID(int task_ID) {
+    public Task getTaskByID(int task_ID) {
         return taskDao.selectTaskByID(task_ID);
     }
 
