@@ -4,7 +4,9 @@ import java.util.List;
 
 public class QueryHelper
 {
-
+    /** TODO: This method needs to be able to recognize ' or " in the string and fix accordingly.
+     *   Alternatively, make sure whenever we are inserting data, use '' instead of ')
+     */
     public static String insertQuery(String table, List<String> attributes, List<String> values)
     {
         StringBuilder query = new StringBuilder("INSERT INTO " + table + "(");
