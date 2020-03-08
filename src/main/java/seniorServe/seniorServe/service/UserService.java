@@ -7,10 +7,10 @@ import seniorServe.seniorServe.dao.UserDao;
 import seniorServe.seniorServe.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService
+{
     private final UserDao userDao;
 
     @Autowired //Qualifier corresponds to implementation inside Repository with same String
@@ -29,7 +29,7 @@ public class UserService {
         return userDao.selectAllUsers();
     }
 
-    public Optional<User> getUserByUsername(String username)
+    public User getUserByUsername(String username)
     {
         return userDao.selectUserByUsername(username);
     }

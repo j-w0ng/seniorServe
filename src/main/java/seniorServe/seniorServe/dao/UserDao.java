@@ -3,7 +3,6 @@ package seniorServe.seniorServe.dao;
 import seniorServe.seniorServe.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserDao
 {
@@ -12,7 +11,7 @@ public interface UserDao
 
     List<User> selectAllUsers();
 
-    Optional<User> selectUserByUsername(String username);
+    User selectUserByUsername(String username);
 
     int deleteUser(String username);
 
