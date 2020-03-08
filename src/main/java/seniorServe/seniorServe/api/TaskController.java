@@ -30,7 +30,7 @@ public class TaskController {
 
     @GetMapping(path = "task_ID={taskID}")
     public Task getTaskByID(@PathVariable("taskID") int task_ID) {
-        return taskService.getTaskByID(task_ID).orElse(null);
+        return taskService.getTaskByID(task_ID);
     }
 
     @DeleteMapping(path = "{taskID}")
