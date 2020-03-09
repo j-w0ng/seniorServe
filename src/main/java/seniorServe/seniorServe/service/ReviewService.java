@@ -7,6 +7,7 @@ import seniorServe.seniorServe.dao.ReviewDao;
 import seniorServe.seniorServe.model.Review;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class ReviewService
@@ -21,7 +22,7 @@ public class ReviewService
 
     public int addReview(Review review)
     {
-        return reviewDao.insertReview(review.getReviewID(), review);
+        return reviewDao.insertReview(ThreadLocalRandom.current().nextInt(1, Integer.MAX_VALUE), review);
     }
 
     public List<Review> getAllReviews()

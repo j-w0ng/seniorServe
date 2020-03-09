@@ -6,14 +6,14 @@ import javax.validation.constraints.NotBlank;
 
 public class Review
 {
-    private final String reviewID;
+    private final int reviewID;
     @NotBlank
     private final String description;
     private final int rating;
     private final int taskID;
     private final String volunteerUserName;
 
-    public Review(@JsonProperty("reviewID") String reviewID,
+    public Review(@JsonProperty("reviewID") int reviewID,
                   @JsonProperty("description") String description,
                   @JsonProperty("rating") int rating,
                   @JsonProperty("taskID") int taskID,
@@ -26,7 +26,7 @@ public class Review
         this.volunteerUserName = volunteerUserName;
     }
 
-    public String getReviewID()
+    public int getReviewID()
     {
         return reviewID;
     }

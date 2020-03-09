@@ -18,11 +18,11 @@ public class ReviewDataAccessService implements ReviewDao
     }
 
     @Override
-    public int insertReview(String username, Review review)
+    public int insertReview(int reviewID, Review review)
     {
         String query = QueryHelper.insertQuery("makereview",
                 Arrays.asList("Review_ID", "Description", "Rating", "Task_ID", "VUsername"),
-                Arrays.asList(review.getReviewID(), review.getDescription(), Integer.toString(review.getRating()), Integer.toString(review.getTaskID()), review.getVolunteerUserName()));
+                Arrays.asList(Integer.toString(reviewID), review.getDescription(), Integer.toString(review.getRating()), Integer.toString(review.getTaskID()), review.getVolunteerUserName()));
         return jdbcTemplate.update(query);
     }
 
@@ -31,7 +31,7 @@ public class ReviewDataAccessService implements ReviewDao
     {
         String query = "SELECT * FROM makereview";
         return jdbcTemplate.query(query, (resultSet, i) ->
-                new Review(resultSet.getString("Review_ID"),
+                new Review(resultSet.getInt("Review_ID"),
                         resultSet.getString("Description"),
                         resultSet.getInt("Rating"),
                         resultSet.getInt("Task_ID"),
@@ -45,7 +45,7 @@ public class ReviewDataAccessService implements ReviewDao
         try
         {
             return jdbcTemplate.queryForObject(query, new Object[]{reviewID}, (resultSet, i) ->
-                    new Review(resultSet.getString("Review_ID"),
+                    new Review(resultSet.getInt("Review_ID"),
                             resultSet.getString("Description"),
                             resultSet.getInt("Rating"),
                             resultSet.getInt("Task_ID"),
@@ -69,7 +69,7 @@ public class ReviewDataAccessService implements ReviewDao
     {
         String query = QueryHelper.updateQuery("makereview",
                 Arrays.asList("Review_ID", "Description", "Rating", "Task_ID", "VUsername"),
-                Arrays.asList(review.getReviewID(), review.getDescription(), Integer.toString(review.getRating()), Integer.toString(review.getTaskID()), review.getVolunteerUserName()),
+                Arrays.asList(Integer.toString(review.getReviewID()), review.getDescription(), Integer.toString(review.getRating()), Integer.toString(review.getTaskID()), review.getVolunteerUserName()),
                 "Review_ID = '" + reviewID + "'");
         return jdbcTemplate.update(query);
     }
