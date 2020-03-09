@@ -24,7 +24,8 @@ public class QueryHelper
         for (int i = 0; i < values.size(); i++)
         {
             query.append("'");
-            query.append(values.get(i));
+            query.append(values.get(i)
+                               .replaceAll("'", "''"));
             query.append("'");
             if (i != values.size() - 1)
             {
