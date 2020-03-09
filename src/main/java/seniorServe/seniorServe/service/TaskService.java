@@ -30,6 +30,18 @@ public class TaskService {
         return taskDao.selectTaskByID(task_ID);
     }
 
+    public List<Task> getTaskByUsername(String username, String order) {
+        return taskDao.selectTaskByUsername(username, order);
+    }
+
+    public List<Task> getTaskByFilter(String filterConditions, String order) {
+        return taskDao.selectTaskByFilter(filterConditions, order);
+    }
+
+    public int updateTask(int task_ID, String taskUpdate) {
+        return taskDao.updateTask(task_ID, taskUpdate);
+    }
+
     public int deleteTask(int task_ID) {
         return taskDao.deleteTask(task_ID);
     }

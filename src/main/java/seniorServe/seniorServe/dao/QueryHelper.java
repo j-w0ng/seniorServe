@@ -61,4 +61,27 @@ public class QueryHelper
 
         return query.toString();
     }
+
+    public static String updateQueryNoType(String table, List<String> attributes, List<String> values, String whereCondition)
+    {
+        StringBuilder query = new StringBuilder("UPDATE " + table + " SET ");
+
+        for (int i = 0; i < attributes.size(); i++)
+        {
+            query.append(attributes.get(i));
+            query.append("=");
+            query.append(values.get(i));
+
+            if (i != attributes.size() - 1)
+            {
+                query.append(", ");
+            }
+        }
+
+        query.append(" WHERE ");
+        query.append(whereCondition);
+        query.append(";");
+
+        return query.toString();
+    }
 }
