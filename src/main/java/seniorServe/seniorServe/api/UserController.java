@@ -9,6 +9,7 @@ import seniorServe.seniorServe.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/user")
 @RestController
 public class UserController {
