@@ -12,7 +12,8 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/user")
 @RestController
-public class UserController {
+public class UserController
+{
 
     private final UserService userService;
 
@@ -37,7 +38,7 @@ public class UserController {
     @GetMapping(path = "{username}")
     public User getUserByUsername(@PathVariable("username") String username)
     {
-        return userService.getUserByUsername(username).orElse(null);
+        return userService.getUserByUsername(username);
     }
 
     @DeleteMapping(path = "{username}")

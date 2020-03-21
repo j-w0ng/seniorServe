@@ -1,13 +1,13 @@
 package seniorServe.seniorServe.dao;
 
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.User;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Repository("userDaoPostgres")
 public class UserDataAccessService implements UserDao
@@ -41,16 +41,21 @@ public class UserDataAccessService implements UserDao
     }
 
     @Override
-    public Optional<User> selectUserByUsername(String username)
+    public User selectUserByUsername(String username)
     {
         String query = "SELECT * FROM users WHERE username = '" + username + "';";
-        User user = jdbcTemplate.queryForObject(query, new Object[]{}, (resultSet, i) ->
-                new User(resultSet.getString("Username"),
-                        resultSet.getString("First_Name"),
-                        resultSet.getString("Last_Name"),
-                        resultSet.getString("PostalCode"),
-                        resultSet.getString("Address")));
-        return Optional.ofNullable(user);
+        try {
+            return jdbcTemplate.queryForObject(query, new Object[]{}, (resultSet, i) ->
+                    new User(resultSet.getString("Username"),
+                            resultSet.getString("First_Name"),
+                            resultSet.getString("Last_Name"),
+                            resultSet.getString("PostalCode"),
+                            resultSet.getString("Address")));
+        }
+        catch (EmptyResultDataAccessException e)
+        {
+            return null;
+        }
     }
 
     @Override
