@@ -7,6 +7,7 @@ import seniorServe.seniorServe.service.VolunteerEventService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/volunteer")
 @RestController
 public class VolunteerEventController

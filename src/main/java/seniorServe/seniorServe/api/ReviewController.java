@@ -9,6 +9,7 @@ import seniorServe.seniorServe.service.ReviewService;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/review")
 @RestController
 public class ReviewController

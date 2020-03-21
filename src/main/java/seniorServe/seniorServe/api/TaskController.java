@@ -7,6 +7,7 @@ import seniorServe.seniorServe.service.TaskService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api/v1/task")
 @RestController
 public class TaskController {
