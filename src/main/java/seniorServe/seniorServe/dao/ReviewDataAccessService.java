@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.Review;
@@ -72,5 +73,47 @@ public class ReviewDataAccessService implements ReviewDao
                 Arrays.asList(Integer.toString(review.getReviewID()), review.getDescription(), Integer.toString(review.getRating()), Integer.toString(review.getTaskID()), review.getVolunteerUserName()),
                 "Review_ID = '" + reviewID + "'");
         return jdbcTemplate.update(query);
+    }
+
+    @Override
+    public List<Review> selectReviewByTaskID(int taskID) {
+        String sqlQuery = "SELECT Review_ID, Description, Rating, Task_ID, VUsername " +
+                "FROM MakeReview WHERE Task_ID = " + taskID;
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::ReviewRowMapper);
+    }
+
+
+    /**
+     *
+     * @param taskID: The taskID of a review
+     * @return The average rating of all the reviews related to the taskID
+     *      or -1 is no reviews exist for that taskID
+     */
+    @Override
+    public double getAverageRatingByTaskID(int taskID) {
+        String sqlQuery = "SELECT to_char(AVG (rating),'99D99')" +
+                " FROM MakeReview " +
+                " WHERE Task_ID = " + taskID +
+                " GROUP BY VUsername ";
+        try {
+            Object result = jdbcTemplate.queryForObject(sqlQuery, Double.class);
+            return (double) result;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return -1;
+        }
+    }
+
+    @Override
+    public double getAverageRatingByVolunteer(String VUsername) {
+        String sqlQuery = "SELECT to_char(AVG (rating),'99D99')" +
+                " FROM MakeReview " +
+                " WHERE VUsername = '" + VUsername + "'" +
+                " GROUP BY VUsername ";
+        try {
+            Object result = jdbcTemplate.queryForObject(sqlQuery, Double.class);
+            return (double) result;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return -1;
+        }
     }
 }

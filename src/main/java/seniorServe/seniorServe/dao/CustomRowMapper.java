@@ -1,5 +1,6 @@
 package seniorServe.seniorServe.dao;
 
+import seniorServe.seniorServe.model.Review;
 import seniorServe.seniorServe.model.Task;
 
 import java.sql.ResultSet;
@@ -16,5 +17,13 @@ public class CustomRowMapper {
                 rs.getString("Address"),
                 rs.getString("Username"),
                 rs.getDate("CreateTime"));
+    }
+
+    public static Review ReviewRowMapper(ResultSet rs, int i) throws SQLException {
+        return new Review(rs.getInt("Review_ID"),
+                rs.getString("Description"),
+                rs.getInt("Rating"),
+                rs.getInt("Task_ID"),
+                rs.getString("VUsername"));
     }
 }

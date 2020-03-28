@@ -40,6 +40,21 @@ public class ReviewController
         return reviewService.getReviewByReviewID(reviewID);
     }
 
+    @GetMapping(path = "/task_ID={TaskID}")
+    public List<Review> getReviewByTaskID(@PathVariable("TaskID") int taskID) {
+        return reviewService.getReviewByTaskID(taskID);
+    }
+
+    @GetMapping(path = "/averageRating/task_ID={TaskID}")
+    public double getAverageRatingByTaskID(@PathVariable("TaskID") int taskID) {
+        return reviewService.getAverageRatingByTaskID(taskID);
+    }
+
+    @GetMapping(path = "/averageRating/volunteer={VUser}")
+    public Object getAverageRatingByVUsername(@PathVariable("VUser") String VUsername) {
+        return reviewService.getAverageRatingByVolunteer(VUsername);
+    }
+
     @DeleteMapping(path = "{reviewID}")
     public void deleteReview(@PathVariable("reviewID") int reviewID)
     {
