@@ -99,7 +99,7 @@ public class TaskDataAccessService implements TaskDao {
      *                   loc=locAttribute - user input for location tab (Checks province AND city)
      *                   city=cityAttribute - only checks City in Location
      *                   prov=provAttribute - only checks Province in Location
-     *                   pref=prefAttribute - checks task Preferences
+     *                   pref=prefAttribute - checks task Preferences.pref_name (Not case sensitive)
      *                   daterange=start:end - range of two dates before and after. (If multiple, only take first)
      *
      *                   Each condition is separated by | (%7C), each condition must have and =
@@ -167,7 +167,8 @@ public class TaskDataAccessService implements TaskDao {
                     toAddLocationFilters.add("province ILIKE '" + filterAttribute[1] + "'");
 
                 } else if (filterAttribute[0].equals("pref")) {
-                    toAddPreferenceFilters.add("pref_id = '" + filterAttribute[1] + "'");
+//                    toAddPreferenceFilters.add("pref_id = '" + filterAttribute[1] + "'");
+                    toAddPreferenceFilters.add("pref_name ILIKE '" + filterAttribute[1] + "'");
 
                 } else if (filterAttribute[0].equals("daterange")) {
                     String[] dateRange = filterAttribute[1].split(":");
@@ -210,7 +211,10 @@ public class TaskDataAccessService implements TaskDao {
 
         if (filterPreference != null && filterPreference.size() > 0) {
             SQL += " AND Task.Task_ID IN (" +
-                    "SELECT Task.Task_ID FROM Task, TasksHasPreference WHERE Task.Task_ID = TasksHasPreference.Task_ID AND (";
+                    " SELECT Task.Task_ID FROM Task, TasksHasPreference, Preference" +
+                    " WHERE Task.Task_ID = TasksHasPreference.Task_ID" +
+                    " AND TasksHasPreference.Pref_ID = Preference.Pref_ID " +
+                    " AND (";
             for (int i=0; i<filterPreference.size(); i++) {
                 SQL += filterPreference.get(i);
                 if (i < filterPreference.size()-1)

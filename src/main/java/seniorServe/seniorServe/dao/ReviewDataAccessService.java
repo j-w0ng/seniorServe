@@ -82,6 +82,12 @@ public class ReviewDataAccessService implements ReviewDao
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::ReviewRowMapper);
     }
 
+    @Override
+    public List<Review> selectReviewsByVolunteer(String VUsername) {
+        String sqlQuery = "SELECT Review_ID, Description, Rating, Task_ID, VUsername " +
+                "FROM MakeReview WHERE VUsername = '" + VUsername + "';";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::ReviewRowMapper);
+    }
 
     /**
      *

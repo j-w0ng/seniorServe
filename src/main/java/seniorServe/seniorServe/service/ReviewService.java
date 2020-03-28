@@ -39,6 +39,10 @@ public class ReviewService
         return reviewDao.selectReviewByTaskID(taskID);
     }
 
+    public List<Review> getReviewsByVolunteer(String VUsername) {
+        return reviewDao.selectReviewsByVolunteer(VUsername);
+    }
+
     public double getAverageRatingByTaskID(int taskID) {
         return reviewDao.getAverageRatingByTaskID(taskID);
     }
@@ -46,7 +50,6 @@ public class ReviewService
     public double getAverageRatingByVolunteer(String VUsername) {
         return reviewDao.getAverageRatingByVolunteer(VUsername);
     }
-
 
     public void deleteReview(int reviewID)
     {

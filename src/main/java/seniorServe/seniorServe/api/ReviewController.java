@@ -45,13 +45,18 @@ public class ReviewController
         return reviewService.getReviewByTaskID(taskID);
     }
 
+    @GetMapping(path = "/volunteer={VUsername}")
+    public List<Review> getReviewByUsername(@PathVariable("VUsername") String VUsername) {
+        return reviewService.getReviewsByVolunteer(VUsername);
+    }
+
     @GetMapping(path = "/averageRating/task_ID={TaskID}")
     public double getAverageRatingByTaskID(@PathVariable("TaskID") int taskID) {
         return reviewService.getAverageRatingByTaskID(taskID);
     }
 
     @GetMapping(path = "/averageRating/volunteer={VUser}")
-    public Object getAverageRatingByVUsername(@PathVariable("VUser") String VUsername) {
+    public double getAverageRatingByVUsername(@PathVariable("VUser") String VUsername) {
         return reviewService.getAverageRatingByVolunteer(VUsername);
     }
 
