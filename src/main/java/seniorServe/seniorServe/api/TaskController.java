@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.Task;
 import seniorServe.seniorServe.service.TaskService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RequestMapping("api/v1/task")
@@ -19,7 +21,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public void addTask(@RequestBody Task task) {
+    public void addTask(@Valid @NotNull @RequestBody Task task) {
         taskService.addTask(task);
     }
 

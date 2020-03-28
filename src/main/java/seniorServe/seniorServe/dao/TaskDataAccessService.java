@@ -34,11 +34,6 @@ public class TaskDataAccessService implements TaskDao {
         return jdbcTemplate.update(query);
     }
 
-    /** TODO: Should we only allow update one field per task, or can update everything all at once (Not touching
-     *   the fields that are not included)
-     *   -Requires taskID and all the fields you want to update and change (Need to parse the response)
-     *   -If includes multiple statements of the same field, only take the 1st one.
-     */
     @Override
     public int updateTask(int task_ID, String updateString) {
         Map<String, String> updateMap = parseUpdateString(updateString, taskAttributes, taskTypes);
@@ -155,7 +150,6 @@ public class TaskDataAccessService implements TaskDao {
         List<String> toAddDateFilter = new ArrayList<>();
 
         for (String f : filters) {
-            String toAdd = "";
             String currentFilter = f.trim().toLowerCase();
             String[] filterAttribute = currentFilter.split("=", 2);
             if (filterAttribute.length >= 2 && !filterAttribute[1].isEmpty() && taskFilters.contains(filterAttribute[0])) {
