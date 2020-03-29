@@ -39,6 +39,10 @@ public class TaskService {
         return taskDao.selectTaskByFilter(filterConditions, order);
     }
 
+    public int updateTask(Task task) {
+        return taskDao.updateTaskBody(task);
+    }
+
     public int updateTask(int task_ID, String taskUpdate) {
         return taskDao.updateTask(task_ID, taskUpdate);
     }

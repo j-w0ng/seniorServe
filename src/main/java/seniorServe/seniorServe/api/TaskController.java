@@ -63,6 +63,12 @@ public class TaskController {
     public int updateTask(@PathVariable("taskID") int task_ID, @PathVariable("updates") String taskUpdates) {
         return taskService.updateTask(task_ID, taskUpdates);
     }
+
+    @PutMapping
+    public int updateTaskBody(@Valid @NotNull @RequestBody Task task) {
+        return taskService.updateTask(task);
+    }
+
     /**
      * Can only delete a task using associated TaskID
      * @param task_ID

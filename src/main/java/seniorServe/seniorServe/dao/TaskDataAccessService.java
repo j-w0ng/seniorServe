@@ -36,6 +36,14 @@ public class TaskDataAccessService implements TaskDao {
     }
 
     @Override
+    public int updateTaskBody(Task task) {
+        String query = QueryHelper.updateQuery("Task",
+                taskAttributes, getTaskValues(task),
+                "task_id = '" + task.getTask_ID() + "'");
+        return jdbcTemplate.update(query);
+    }
+
+    @Override
     public int updateTask(int task_ID, String updateString) {
         Map<String, String> updateMap = parseUpdateString(updateString, taskAttributes, taskTypes);
         List<String> attributes = new ArrayList<>();
