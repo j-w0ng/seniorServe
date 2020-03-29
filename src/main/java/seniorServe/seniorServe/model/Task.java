@@ -3,13 +3,12 @@ package seniorServe.seniorServe.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 public class Task {
 
-    @NotBlank @NotNull
+    @NotNull
     private final int task_ID;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private final Date date;

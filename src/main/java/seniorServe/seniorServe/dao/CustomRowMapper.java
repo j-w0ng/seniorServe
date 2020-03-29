@@ -1,5 +1,6 @@
 package seniorServe.seniorServe.dao;
 
+import seniorServe.seniorServe.model.Location;
 import seniorServe.seniorServe.model.Review;
 import seniorServe.seniorServe.model.Task;
 
@@ -25,5 +26,12 @@ public class CustomRowMapper {
                 rs.getInt("Rating"),
                 rs.getInt("Task_ID"),
                 rs.getString("VUsername"));
+    }
+
+    public static Location LocationRowMapper(ResultSet rs, int i) throws SQLException {
+        return new Location(rs.getString("PostalCode"),
+                rs.getString("Address"),
+                rs.getString("City"),
+                rs.getString("Province"));
     }
 }
