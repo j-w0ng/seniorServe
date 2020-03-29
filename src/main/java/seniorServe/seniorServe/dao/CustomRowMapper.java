@@ -51,4 +51,24 @@ public class CustomRowMapper {
         return new UserRating(rs.getString("Username"),
                 rs.getDouble("Rating"));
     }
+
+    public static User UserRowMapper(ResultSet rs, int i) throws SQLException {
+        return new User(rs.getString("username"),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("postalCode"),
+                rs.getString("address"));
+    }
+
+    public static String UsernameRowMapper(ResultSet rs, int i) throws SQLException {
+        return rs.getString("username");
+    }
+
+    public static TaskCompletion TaskCompletionRowMapper(ResultSet rs, int i) throws SQLException {
+        return new TaskCompletion(rs.getInt("complete_ID"),
+                rs.getDate("date"),
+                rs.getInt("task_ID"),
+                rs.getDouble("monetaryAmount"),
+                rs.getString("username"));
+    }
 }

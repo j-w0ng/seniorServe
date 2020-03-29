@@ -61,6 +61,11 @@ public class ReviewController
         return reviewService.getAverageRatingByVolunteer(VUsername);
     }
 
+    @GetMapping(path = "/distinctUsers")
+    public List<String> getDistinctUsers() {
+        return reviewService.getDistinctUsersInReview();
+    }
+
     @GetMapping(path = "/allAverageRating")
     public List<UserRating> getAverageRatings() {
         return reviewService.getAllAverageRatings();

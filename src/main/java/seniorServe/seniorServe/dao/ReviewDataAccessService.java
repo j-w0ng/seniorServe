@@ -130,4 +130,11 @@ public class ReviewDataAccessService implements ReviewDao
                 " FROM MakeReview GROUP BY VUsername ORDER BY Rating Desc;";
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingRowMapper);
     }
+
+    @Override
+    public List<String> getAllUsers() {
+        String sqlQuery = "SELECT DISTINCT v.Username as Username " +
+                " FROM MakeReview mr, Volunteer v WHERE mr.VUsername = v.username;";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::UsernameRowMapper);
+    }
 }

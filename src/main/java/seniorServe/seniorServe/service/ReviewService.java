@@ -56,6 +56,10 @@ public class ReviewService
         return reviewDao.getAverageRatingByVolunteer(VUsername);
     }
 
+    public List<String> getDistinctUsersInReview() {
+        return reviewDao.getAllUsers();
+    }
+
     public void deleteReview(int reviewID)
     {
         reviewDao.deleteReview(reviewID);

@@ -19,6 +19,8 @@ public interface ReviewDao
 
     List<UserRating> getAllAverageReviews();
 
+    List<String> getAllUsers();
+
     double getAverageRatingByTaskID(int taskID);
 
     double getAverageRatingByVolunteer(String VUsername);
