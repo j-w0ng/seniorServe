@@ -143,7 +143,7 @@ CREATE TABLE TaskRequestPlace (
 	Request_ID 		INTEGER,
 	Date			Date,
 	Task_ID		    INTEGER,
-	PRIMARY KEY (Request_ID, Task_ID),
+	PRIMARY KEY (Request_ID),
 	FOREIGN KEY (Task_ID) REFERENCES Task
 		On delete cascade);
 
@@ -154,33 +154,32 @@ VALUES
 (3, '2018-08-09', 3),
 (4, '2018-06-17', 4),
 (5, '2018-04-17', 5),
-(6, '2018-06-17', 4);
+(6, '2018-06-17', 6);
 
 CREATE TABLE VolunteerPlaceRequest (
 	Username	VARCHAR(20),
 	Request_ID 	INTEGER,
-	Task_ID	    INTEGER,
-	PRIMARY KEY (Request_ID, Task_ID),
+	PRIMARY KEY (Request_ID),
 	FOREIGN KEY (Username) REFERENCES Volunteer,
-	FOREIGN KEY (Request_ID, Task_ID) REFERENCES TaskRequestPlace
-		On delete NO ACTION
+	FOREIGN KEY (Request_ID) REFERENCES TaskRequestPlace
+		On delete cascade
 		On Update Cascade);
 
-INSERT INTO VolunteerPlaceRequest (Task_ID, Request_ID, Username)
+INSERT INTO VolunteerPlaceRequest (Request_ID, Username)
 VALUES
-(1, 1, 'Ann34'),
-(2, 2, 'Jonny55'),
-(3, 3, 'Ali67'),
-(4, 4, 'Dh78'),
-(5, 5, 'Greg8'),
-(4, 6, 'Greg8');
+(1, 'Ann34'),
+(2, 'Jonny55'),
+(3, 'Ali67'),
+(4, 'Dh78'),
+(5, 'Greg8'),
+(6, 'Greg8');
 
 CREATE TABLE TaskCompletePlaced (
 	Complete_ID		INTEGER,
 	Date			Date,
 	Task_ID		    INTEGER,
 	MonetaryAmount	REAL,
-    PRIMARY KEY (Task_ID, Complete_ID),
+    PRIMARY KEY (Complete_ID),
     FOREIGN KEY (Task_ID) REFERENCES Task
         On delete Cascade);
 
@@ -195,20 +194,20 @@ VALUES
 CREATE TABLE SeniorPlaceCompleteTask (
 	Username		VARCHAR(20),
 	Complete_ID		INTEGER,
-	Task_ID		    INTEGER,
 	PRIMARY KEY (Complete_ID),
-	FOREIGN KEY (Complete_ID, Task_ID) REFERENCES TaskCompletePlaced,
+	FOREIGN KEY (Complete_ID) REFERENCES TaskCompletePlaced
+	    on delete cascade,
 	FOREIGN KEY (Username) REFERENCES Senior
 		On delete NO ACTION
 		On Update Cascade);
 
-INSERT INTO SeniorPlaceCompleteTask (Username, Complete_ID, Task_ID)
+INSERT INTO SeniorPlaceCompleteTask (Username, Complete_ID)
 VALUES
-('OldMac6', 1, 1),
-('Bigbird4', 2, 2),
-('Sarah123', 3, 3),
-('Dorothy45', 4, 4),
-('Thomas4', 5, 5);
+('OldMac6', 1),
+('Bigbird4', 2),
+('Sarah123', 3),
+('Dorothy45', 4),
+('Thomas4', 5);
 
 CREATE TABLE MakeReview (
 	Review_ID		INTEGER,

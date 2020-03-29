@@ -22,9 +22,14 @@ public class TaskCompletionService {
         return taskCompletionDao.addTaskCompletion(taskCompletion);
     }
 
-    public int deleteTaskCompletion(int task_ID, int complete_ID) {
-        return taskCompletionDao.deleteTaskCompletion(task_ID, complete_ID);
+    public int deleteTaskCompletionByTaskID(int task_ID) {
+        return taskCompletionDao.deleteTaskCompletionByTask(task_ID);
     }
+
+    public int deleteTaskCompletionByCompleteID(int complete_ID) {
+        return taskCompletionDao.deleteTaskCompletionByCompleteID(complete_ID);
+    }
+
 
     public List<TaskCompletion> getAllTaskCompletion() {
         return taskCompletionDao.getAllTaskCompletion();

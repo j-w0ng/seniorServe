@@ -127,7 +127,7 @@ public class ReviewDataAccessService implements ReviewDao
     @Override
     public List<UserRating> getAllAverageReviews() {
         String sqlQuery = "SELECT VUsername as Username, to_char(AVG (rating),'99D99') as Rating" +
-                " FROM MakeReview GROUP BY VUsername ORDER BY Rating Desc;";
+                " FROM MakeReview GROUP BY VUsername ORDER BY Rating Desc LIMIT 5;";
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingRowMapper);
     }
 

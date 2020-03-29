@@ -26,10 +26,14 @@ public class TaskCompletionController {
         return taskCompletionService.createTaskCompletion(taskCompletion);
     }
 
-    @DeleteMapping(path = "{task_id}&{complete_id}")
-    public int deleteTaskCompletion(@PathVariable("task_id") int task_id,
-                                    @PathVariable("complete_id") int complete_id) {
-        return taskCompletionService.deleteTaskCompletion(task_id, complete_id);
+    @DeleteMapping(path = "task_id={task_id}")
+    public int deleteTaskCompletionByTask(@PathVariable("task_id") int task_id) {
+        return taskCompletionService.deleteTaskCompletionByTaskID(task_id);
+    }
+
+    @DeleteMapping(path = "complete_id={complete_id}")
+    public int deleteTaskCompletionByCompleteID(@PathVariable("complete_id") int complete_id) {
+        return taskCompletionService.deleteTaskCompletionByCompleteID(complete_id);
     }
 
     @GetMapping(path = "allTaskCompletion")
