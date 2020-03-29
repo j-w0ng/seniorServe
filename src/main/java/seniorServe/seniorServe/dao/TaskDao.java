@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.Task;
+import seniorServe.seniorServe.model.TaskLocation;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface TaskDao {
 
     List<Task> selectTaskByUsername(String username, String order);
 
-    List<Task> selectTaskByFilter(String filterConditions, String order);
+    List<TaskLocation> selectTaskByFilter(String filterConditions, String order);
 
     Task selectTaskByID(int task_ID);
 }

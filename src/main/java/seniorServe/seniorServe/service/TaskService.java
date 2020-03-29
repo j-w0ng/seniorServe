@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.TaskDao;
 import seniorServe.seniorServe.model.Task;
+import seniorServe.seniorServe.model.TaskLocation;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class TaskService {
         return taskDao.selectTaskByUsername(username, order);
     }
 
-    public List<Task> getTaskByFilter(String filterConditions, String order) {
+    public List<TaskLocation> getTaskByFilter(String filterConditions, String order) {
         return taskDao.selectTaskByFilter(filterConditions, order);
     }
 

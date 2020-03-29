@@ -3,6 +3,7 @@ package seniorServe.seniorServe.dao;
 import seniorServe.seniorServe.model.Location;
 import seniorServe.seniorServe.model.Review;
 import seniorServe.seniorServe.model.Task;
+import seniorServe.seniorServe.model.TaskLocation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,20 @@ public class CustomRowMapper {
                 rs.getString("Address"),
                 rs.getString("Username"),
                 rs.getDate("CreateTime"));
+    }
+
+    public static TaskLocation TaskLocationRowMapper(ResultSet rs, int i) throws SQLException {
+        return new TaskLocation(rs.getInt("Task_ID"),
+                rs.getDate("Date"),
+                rs.getString("Description"),
+                rs.getInt("Num_Volunteer"),
+                rs.getString("Status"),
+                rs.getString("PostalCode"),
+                rs.getString("Address"),
+                rs.getString("Username"),
+                rs.getDate("CreateTime"),
+                rs.getString("City"),
+                rs.getString("Province"));
     }
 
     public static Review ReviewRowMapper(ResultSet rs, int i) throws SQLException {

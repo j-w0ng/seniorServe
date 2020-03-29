@@ -3,6 +3,7 @@ package seniorServe.seniorServe.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.Task;
+import seniorServe.seniorServe.model.TaskLocation;
 import seniorServe.seniorServe.service.TaskService;
 
 import javax.validation.Valid;
@@ -48,12 +49,12 @@ public class TaskController {
     }
 
     @GetMapping(path = "filter/{filterConditions}")
-    public List<Task> getTaskByFilter(@PathVariable("filterConditions") String filterConditions) {
+    public List<TaskLocation> getTaskByFilter(@PathVariable("filterConditions") String filterConditions) {
         return taskService.getTaskByFilter(filterConditions, "");
     }
 
     @GetMapping(path = "filter/{filterConditions}/{orderConditions}")
-    public List<Task> getTaskByFilter(@PathVariable("filterConditions") String filterConditions,
+    public List<TaskLocation> getTaskByFilter(@PathVariable("filterConditions") String filterConditions,
                                       @PathVariable("orderConditions") String orderConditions) {
         return taskService.getTaskByFilter(filterConditions, orderConditions);
     }

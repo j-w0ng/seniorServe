@@ -4,6 +4,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.Task;
+import seniorServe.seniorServe.model.TaskLocation;
 
 import java.sql.Date;
 import java.util.*;
@@ -111,7 +112,7 @@ public class TaskDataAccessService implements TaskDao {
      *
      * @return list of tasks that matching filter
      */
-    public List<Task> selectTaskByFilter(String filterConditions, String order) {
+    public List<TaskLocation> selectTaskByFilter(String filterConditions, String order) {
         List<String> validOrderAttributes = new ArrayList<>();
         validOrderAttributes.addAll(taskAttributes);
         validOrderAttributes.addAll(locationAttributes);
@@ -123,7 +124,8 @@ public class TaskDataAccessService implements TaskDao {
                 "SELECT Task.Task_ID, Date, Description, Num_Volunteer, Task.PostalCode, Status, Address, Username, CreateTime, City, Province " +
                 "FROM PostalCode, Task " +
                 "WHERE PostalCode.PostalCode = Task.PostalCode " + createSQLFromFilterMap(filterMap) + orderString;
-        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskRowMapper);
+//        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskRowMapper);
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRowMapper);
     }
 
     /**
