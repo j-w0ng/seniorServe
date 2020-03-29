@@ -28,4 +28,14 @@ public class LocationService {
     public List<Location> getLocations() {
         return locationDao.selectAllLocations();
     }
+
+    public List<String> getAllProvinces()
+    {
+        return locationDao.selectAllProvinces();
+    }
+
+    public List<String> getAllCities()
+    {
+        return locationDao.selectAllCities();
+    }
 }

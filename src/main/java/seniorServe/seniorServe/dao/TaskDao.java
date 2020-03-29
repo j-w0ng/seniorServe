@@ -13,7 +13,7 @@ public interface TaskDao {
 
     int updateTask(int task_ID, String updateString);
 
-    List<Task> selectAllTask();
+    List<TaskLocation> selectAllTask();
 
     List<Task> selectTaskByUsername(String username, String order);
 

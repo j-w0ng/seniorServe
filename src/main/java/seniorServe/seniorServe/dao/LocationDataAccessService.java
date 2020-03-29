@@ -49,6 +49,20 @@ public class LocationDataAccessService implements LocationDao {
         return 0;
     }
 
+    @Override
+    public List<String> selectAllProvinces() {
+        String query = "SELECT DISTINCT province FROM postalcode;";
+        return jdbcTemplate.query(query, (resultSet, i) ->
+            resultSet.getString("province"));
+    }
+
+    @Override
+    public List<String> selectAllCities() {
+        String query = "SELECT DISTINCT city FROM postalcode;";
+        return jdbcTemplate.query(query, (resultSet, i) ->
+                resultSet.getString("city"));
+    }
+
     private static boolean isValidPostalCode(String PostalCode) {
         String regex = "^(?![DFIOQU])([ABCEGHJ-NPRSTVXY]\\d[A-Z]\\d[A-Z]\\d)$";
         return Pattern.matches(regex, PostalCode);

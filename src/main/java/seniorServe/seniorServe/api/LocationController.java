@@ -31,6 +31,18 @@ public class LocationController {
         return locationService.getLocations();
     }
 
+    @GetMapping(path = "getAllProvinces")
+    public List<String> getAllProvinces()
+    {
+        return locationService.getAllProvinces();
+    }
+
+    @GetMapping(path = "getAllCities")
+    public List<String> getAllCities()
+    {
+        return locationService.getAllCities();
+    }
+
     @DeleteMapping
     public int deleteLocation(@Valid @NotNull @RequestBody Location location) {
         return locationService.deleteLocation(location);

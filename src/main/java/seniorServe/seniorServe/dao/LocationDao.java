@@ -12,4 +12,8 @@ public interface LocationDao {
     int deleteLocation(Location location);
 
     int updateLocation(Location previous, Location updated);
+
+    List<String> selectAllProvinces();
+
+    List<String> selectAllCities();
 }

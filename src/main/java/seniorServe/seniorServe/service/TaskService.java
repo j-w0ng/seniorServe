@@ -23,7 +23,7 @@ public class TaskService {
         return taskDao.insertTask(task);
     }
 
-    public List<Task> getAllTasks() {
+    public List<TaskLocation> getAllTasks() {
         return taskDao.selectAllTask();
     }
 

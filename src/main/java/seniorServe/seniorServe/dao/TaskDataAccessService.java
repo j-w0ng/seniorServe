@@ -77,9 +77,11 @@ public class TaskDataAccessService implements TaskDao {
     }
 
     @Override
-    public List<Task> selectAllTask() {
-        String sqlQuery = "SELECT Task_ID, Date, Description, Num_Volunteer, PostalCode, Status, Address, Username, CreateTime FROM Task;";
-        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskRowMapper);
+    public List<TaskLocation> selectAllTask() {
+        String sqlQuery = "SELECT Task.Task_ID, Date, Description, Num_Volunteer, Task.PostalCode, Status, Address, Username, CreateTime, City, Province " +
+                "FROM PostalCode, Task " +
+                "WHERE PostalCode.PostalCode = Task.PostalCode";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRowMapper);
     }
 
     @Override
