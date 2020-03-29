@@ -38,14 +38,14 @@ public class TaskController {
     }
 
     @GetMapping(path = "username={username}")
-    public List<Task> getTaskByUsernameNoOrder(@PathVariable("username") String username) {
+    public List<TaskLocation> getTaskByUsernameNoOrder(@PathVariable("username") String username) {
         return taskService.getTaskByUsername(username, "");
     }
 
     @GetMapping(path = "username={username}/{orderConditions}")
     public List<Task> getTaskByUsernameNoOrder(@PathVariable("username") String username,
                                                @PathVariable("orderConditions") String orders) {
-        return taskService.getTaskByUsername(username, orders);
+        return taskService.getTaskByUsernameOrdered(username, orders);
     }
 
     @GetMapping(path = "filter/{filterConditions}")
