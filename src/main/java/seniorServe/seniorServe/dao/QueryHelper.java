@@ -13,7 +13,7 @@ public class QueryHelper
 
         for (int i = 0; i < attributes.size(); i++)
         {
-            query.append(attributes.get(i));
+            query.append(attributes.get(i).replaceAll("'", "''"));
             if (i != attributes.size() - 1)
             {
                 query.append(", ");
@@ -24,8 +24,7 @@ public class QueryHelper
         for (int i = 0; i < values.size(); i++)
         {
             query.append("'");
-            query.append(values.get(i)
-                               .replaceAll("'", "''"));
+            query.append(values.get(i).replaceAll("'", "''"));
             query.append("'");
             if (i != values.size() - 1)
             {
@@ -44,10 +43,10 @@ public class QueryHelper
 
         for (int i = 0; i < attributes.size(); i++)
         {
-            query.append(attributes.get(i));
+            query.append(attributes.get(i).replaceAll("'", "''"));
             query.append("=");
             query.append("'");
-            query.append(values.get(i));
+            query.append(values.get(i).replaceAll("'", "''"));
             query.append("'");
 
             if (i != attributes.size() - 1)
@@ -69,9 +68,9 @@ public class QueryHelper
 
         for (int i = 0; i < attributes.size(); i++)
         {
-            query.append(attributes.get(i));
+            query.append(attributes.get(i).replaceAll("'", "''"));
             query.append("=");
-            query.append(values.get(i));
+            query.append(values.get(i).replaceAll("'", "''"));
 
             if (i != attributes.size() - 1)
             {
