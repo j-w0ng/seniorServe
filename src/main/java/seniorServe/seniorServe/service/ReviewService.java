@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.ReviewDao;
 import seniorServe.seniorServe.model.Review;
+import seniorServe.seniorServe.model.UserRating;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,6 +42,10 @@ public class ReviewService
 
     public List<Review> getReviewsByVolunteer(String VUsername) {
         return reviewDao.selectReviewsByVolunteer(VUsername);
+    }
+
+    public List<UserRating> getAllAverageRatings() {
+        return reviewDao.getAllAverageReviews();
     }
 
     public double getAverageRatingByTaskID(int taskID) {

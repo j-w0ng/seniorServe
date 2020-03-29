@@ -1,9 +1,6 @@
 package seniorServe.seniorServe.dao;
 
-import seniorServe.seniorServe.model.Location;
-import seniorServe.seniorServe.model.Review;
-import seniorServe.seniorServe.model.Task;
-import seniorServe.seniorServe.model.TaskLocation;
+import seniorServe.seniorServe.model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,5 +45,10 @@ public class CustomRowMapper {
                 rs.getString("Address"),
                 rs.getString("City"),
                 rs.getString("Province"));
+    }
+
+    public static UserRating UserRatingRowMapper(ResultSet rs, int i) throws SQLException {
+        return new UserRating(rs.getString("Username"),
+                rs.getDouble("Rating"));
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.Review;
+import seniorServe.seniorServe.model.UserRating;
 
 import java.util.Arrays;
 import java.util.List;
@@ -121,5 +122,12 @@ public class ReviewDataAccessService implements ReviewDao
         } catch (IncorrectResultSizeDataAccessException e) {
             return -1;
         }
+    }
+
+    @Override
+    public List<UserRating> getAllAverageReviews() {
+        String sqlQuery = "SELECT VUsername as Username, to_char(AVG (rating),'99D99') as Rating" +
+                " FROM MakeReview GROUP BY VUsername ORDER BY Rating Desc;";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingRowMapper);
     }
 }

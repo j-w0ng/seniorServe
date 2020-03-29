@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.Review;
+import seniorServe.seniorServe.model.UserRating;
 import seniorServe.seniorServe.service.ReviewService;
 
 import javax.validation.Valid;
@@ -58,6 +59,11 @@ public class ReviewController
     @GetMapping(path = "/averageRating/volunteer={VUser}")
     public double getAverageRatingByVUsername(@PathVariable("VUser") String VUsername) {
         return reviewService.getAverageRatingByVolunteer(VUsername);
+    }
+
+    @GetMapping(path = "/allAverageRating")
+    public List<UserRating> getAverageRatings() {
+        return reviewService.getAllAverageRatings();
     }
 
     @DeleteMapping(path = "{reviewID}")

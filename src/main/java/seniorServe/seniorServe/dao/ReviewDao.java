@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.Review;
+import seniorServe.seniorServe.model.UserRating;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ReviewDao
     List<Review> selectReviewByTaskID(int taskID);
 
     List<Review> selectReviewsByVolunteer(String VUsername);
+
+    List<UserRating> getAllAverageReviews();
 
     double getAverageRatingByTaskID(int taskID);
 
