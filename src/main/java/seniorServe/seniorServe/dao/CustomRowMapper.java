@@ -68,8 +68,8 @@ public class CustomRowMapper {
 
     public static User UserRowMapper(ResultSet rs, int i) throws SQLException {
         return new User(rs.getString("username"),
-                rs.getString("firstName"),
-                rs.getString("lastName"),
+                rs.getString("first_name"),
+                rs.getString("last_name"),
                 rs.getString("postalCode"),
                 rs.getString("address"));
     }
@@ -106,5 +106,9 @@ public class CustomRowMapper {
         return new UserRatingHours(rs.getString("username"),
                 rs.getDouble("rating"),
                 rs.getInt("totalHours"));
+    }
+
+    public static String SeniorVolunteerRowMapper(ResultSet rs, int i) throws SQLException {
+        return rs.getString("username");
     }
 }

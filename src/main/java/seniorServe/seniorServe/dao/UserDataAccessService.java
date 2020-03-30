@@ -74,4 +74,84 @@ public class UserDataAccessService implements UserDao
                 "username = '" + username + "'");
         return jdbcTemplate.update(query);
     }
+
+    /**
+     * Inserts into user then into Senior. Do not use insertUser and insertSenior together!
+     * @param user
+     * @return
+     */
+    @Override
+    public int insertSenior(User user) {
+        insertUser(user.getUsername(), user);
+        String query = QueryHelper.insertQuery("Senior", Arrays.asList("Username"), Arrays.asList(user.getUsername()));
+        return jdbcTemplate.update(query);
+    }
+
+    /**
+     * This deletes the username from Senior and User. If username is not found in Senior, don't delete from User
+     * @param username
+     * @return
+     */
+    @Override
+    public int deleteSenior(String username) {
+        String query = "DELETE FROM Senior WHERE username = '" + username + "';";
+        if (jdbcTemplate.update(query) == 1) {
+            return deleteUser(username);
+        }
+        return 0;
+    }
+
+    @Override
+    public int insertVolunteer(User user) {
+        insertUser(user.getUsername(), user);
+        String query = QueryHelper.insertQuery("Volunteer", Arrays.asList("Username"), Arrays.asList(user.getUsername()));
+        return jdbcTemplate.update(query);
+    }
+
+    @Override
+    public int deleteVolunteer(String username) {
+        String query = "DELETE FROM Volunteer WHERE username = '" + username + "';";
+        if (jdbcTemplate.update(query) == 1) {
+            return deleteUser(username);
+        }
+        return 0;
+    }
+
+    /**
+     * @param username
+     * @return  If 0 - Is not a senior. If > 0 - Is a senior
+     */
+    @Override
+    public int isSenior(String username) {
+        String query =
+                "SELECT * FROM Senior WHERE username = '" + username + "';";
+        List<String> result = jdbcTemplate.query(query, CustomRowMapper::SeniorVolunteerRowMapper);
+        return result.size();
+    }
+
+    /**
+     * @param username
+     * @return  If 0 - Is not a Volunteer. If > 0 - Is a Volunteer
+     */
+    @Override
+    public int isVolunteer(String username) {
+        String query =
+                "SELECT * FROM Volunteer WHERE username = '" + username + "';";
+        List<String> result = jdbcTemplate.query(query, CustomRowMapper::SeniorVolunteerRowMapper);
+        return result.size();
+    }
+
+    @Override
+    public List<User> selectSenior() {
+        String query =
+                "SELECT * FROM Senior, Users WHERE Senior.username = Users.username";
+        return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
+
+    @Override
+    public List<User> selectVolunteer() {
+        String query =
+                "SELECT * FROM Volunteer, Users u WHERE Volunteer.username = u.username";
+        return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
 }

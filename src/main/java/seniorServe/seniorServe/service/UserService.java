@@ -39,8 +39,39 @@ public class UserService
         return userDao.deleteUser(username);
     }
 
-
     public int updateUser(String username, User user) {
         return userDao.updateUser(username, user);
+    }
+
+    public int insertSenior(User user) {
+        return userDao.insertSenior(user);
+    }
+
+    public int deleteSenior(String username) {
+        return userDao.deleteSenior(username);
+    }
+
+    public int isSenior(String username) {
+        return userDao.isSenior(username);
+    }
+
+    public int insertVolunteer(User user) {
+        return userDao.insertVolunteer(user);
+    }
+
+    public int deleteVolunteer(String username) {
+        return userDao.deleteVolunteer(username);
+    }
+
+    public int isVolunteer(String username) {
+        return userDao.isVolunteer(username);
+    }
+
+    public List<User> selectSenior() {
+        return userDao.selectSenior();
+    }
+
+    public List<User> selectVolunteer() {
+        return userDao.selectVolunteer();
     }
 }
