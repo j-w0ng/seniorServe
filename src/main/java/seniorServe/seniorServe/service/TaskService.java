@@ -31,8 +31,12 @@ public class TaskService {
         return taskDao.selectTaskByID(task_ID);
     }
 
-    public List<Task> getTaskByUsername(String username, String order) {
+    public List<TaskLocation> getTaskByUsername(String username, String order) {
         return taskDao.selectTaskByUsername(username, order);
+    }
+
+    public List<Task> getTaskByUsernameOrdered(String username, String order) {
+        return taskDao.selectTaskByUsernameOrdered(username, order);
     }
 
     public List<TaskLocation> getTaskByFilter(String filterConditions, String order) {

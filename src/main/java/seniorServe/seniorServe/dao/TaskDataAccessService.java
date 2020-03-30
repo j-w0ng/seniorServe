@@ -144,10 +144,19 @@ public class TaskDataAccessService implements TaskDao {
      * @param order of sorting: Date desc, Date, Status
      * @return list of tasks associated with username.
      */
-    public List<Task> selectTaskByUsername(String username, String order) {
+    public List<TaskLocation> selectTaskByUsername(String username, String order) {
+        String sqlQuery =
+                "SELECT Task.Task_ID, Date, Description, Num_Volunteer, Task.PostalCode, Status, Address, Username, CreateTime, City, Province " +
+                        "FROM PostalCode, Task " +
+                        "WHERE PostalCode.PostalCode = Task.PostalCode AND Username =" + addSingleQuotes(username) + parseTaskOrder(order, taskAttributes);
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRowMapper);
+    }
+
+    @Override
+    public List<Task> selectTaskByUsernameOrdered(String username, String order) {
         String sqlQuery =
                 "SELECT Task_ID, Date, Description, Num_Volunteer, PostalCode, Status, Address, Username, CreateTime " +
-                "FROM Task WHERE Username = " + addSingleQuotes(username) + parseTaskOrder(order, taskAttributes);
+                        "FROM Task WHERE Username = " + addSingleQuotes(username) + parseTaskOrder(order, taskAttributes);
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskRowMapper);
     }
 
