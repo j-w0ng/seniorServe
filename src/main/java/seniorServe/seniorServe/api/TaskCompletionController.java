@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.TaskCompletion;
+import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
 import seniorServe.seniorServe.service.TaskCompletionService;
 
@@ -21,9 +22,24 @@ public class TaskCompletionController {
         this.taskCompletionService = taskCompletionService;
     }
 
+    /**
+     * Basic functionality of adding a single TaskCompletion
+     * @param taskCompletion
+     * @return
+     */
     @PostMapping
     public int addTaskCompletion(@Valid @NonNull @RequestBody TaskCompletion taskCompletion) {
         return taskCompletionService.createTaskCompletion(taskCompletion);
+    }
+
+    /**
+     * This is the full type that adds volunteerTimeRecords with an entry of TaskCompletion
+     * @param tcr
+     * @return
+     */
+    @PostMapping(path = "taskCompletionRecord")
+    public int addTaskCompletionRecord(@Valid @NonNull @RequestBody TaskCompletionRecord tcr) {
+        return taskCompletionService.createTaskCompletionRecord(tcr);
     }
 
     @DeleteMapping(path = "task_id={task_id}")

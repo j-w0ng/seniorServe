@@ -5,6 +5,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.TaskLocationRequest;
 import seniorServe.seniorServe.model.TaskRequest;
+import seniorServe.seniorServe.model.UserRatingHoursDate;
 import seniorServe.seniorServe.service.TaskRequestService;
 
 import javax.validation.Valid;
@@ -44,6 +45,16 @@ public class TaskRequestController {
     @GetMapping(path = "allTaskRequest/username={username}")
     public List<TaskRequest> getAllTaskRequestObjByUsername(@PathVariable("username") String username) {
         return taskRequestService.getAllTaskRequestObjByUsername(username);
+    }
+
+    /**
+     * Gets all the users that requested to volunteer for given task_id
+     * @param task_id
+     * @return
+     */
+    @GetMapping(path = "allRequestUser/task_id={id}")
+    public List<UserRatingHoursDate> getAllUserRatingsRequestSeniorTaskID(@PathVariable("id") int task_id) {
+        return taskRequestService.getAllUserRatingsForRequestsOfSeniorTask(task_id);
     }
 
     @GetMapping(path = "allTask")

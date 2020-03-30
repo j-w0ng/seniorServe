@@ -3,6 +3,7 @@ package seniorServe.seniorServe.dao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.TaskCompletion;
+import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
 
 import java.util.List;
@@ -43,8 +44,35 @@ public class TaskCompletionDataAccessService implements TaskCompletionDao {
 
         String updateTaskIDStatus =
                 "UPDATE Task SET Status = 'Completed' WHERE Task_ID = " + tc.getTask_ID() + "";
+
         return jdbcTemplate.update(sqlQueryTaskComplete) + jdbcTemplate.update(updateTaskIDStatus) +
             jdbcTemplate.update(sqlQuerySeniorComplete);
+    }
+
+    @Override
+    public int addTaskCompletionRecord(TaskCompletionRecord taskCompletionRecord) {
+        TaskCompletion tc = taskCompletionRecord.getTaskCompletion();
+        String queryUsers =
+                "SELECT username FROM VolunteerVolunteers v WHERE v.Task_ID = " + taskCompletionRecord.getTask_ID();
+        List<String> users =  jdbcTemplate.query(queryUsers, CustomRowMapper::UsernameRowMapper);
+
+        String queryDeleteExtraRequests =
+                "DELETE FROM TaskRequestPlace WHERE Task_ID = " + taskCompletionRecord.getTask_ID();
+        return addTaskCompletion(tc) + addListVolunteerRecords(taskCompletionRecord, users) +
+                jdbcTemplate.update(queryDeleteExtraRequests);
+    }
+
+    private int addListVolunteerRecords(TaskCompletionRecord tcr, List<String> users) {
+        int count = 0;
+        for (String username : users) {
+            int randomTaskCompletionID = ThreadLocalRandom.current().nextInt(1, Integer.MAX_VALUE);
+            String query =
+                    "INSERT INTO VolunteersTimeEntryRecord (Record_ID, Date, TimeOfDay, Hours, Username, Task_ID)" +
+                    " VALUES (" + randomTaskCompletionID + ", '" + tcr.getDate() + "', '" + tcr.getVolunteerTime() + "', " +
+                     tcr.getHours() + ", '" + username + "'," + tcr.getTask_ID() + ")";
+            count += jdbcTemplate.update(query);
+        }
+        return count;
     }
 
     /**

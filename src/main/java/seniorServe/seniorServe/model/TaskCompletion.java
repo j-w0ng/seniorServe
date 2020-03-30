@@ -9,29 +9,29 @@ import java.sql.Date;
 
 public class TaskCompletion {
     @NotNull
-    private final int Complete_ID;
+    private final int complete_ID;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private final Date date;
     @NotNull
-    private final int Task_ID;
-    private final double MonetaryAmount;
+    private final int task_ID;
+    private final double monetaryAmount;
     @NotBlank
-    private final String Username;
+    private final String username;
 
     public TaskCompletion(@JsonProperty("complete_ID") int complete_ID,
                           @JsonProperty("date") Date date,
                           @JsonProperty("task_ID") int task_ID,
                           @JsonProperty("monetaryAmount") double monetaryAmount,
                           @JsonProperty("username") String username) {
-        Complete_ID = complete_ID;
+        this.complete_ID = complete_ID;
         this.date = date;
-        Task_ID = task_ID;
-        MonetaryAmount = monetaryAmount;
-        Username = username;
+        this.task_ID = task_ID;
+        this.monetaryAmount = monetaryAmount;
+        this.username = username;
     }
 
     public int getComplete_ID() {
-        return Complete_ID;
+        return complete_ID;
     }
 
     public Date getDate() {
@@ -39,14 +39,14 @@ public class TaskCompletion {
     }
 
     public int getTask_ID() {
-        return Task_ID;
+        return task_ID;
     }
 
     public double getMonetaryAmount() {
-        return MonetaryAmount;
+        return monetaryAmount;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 }

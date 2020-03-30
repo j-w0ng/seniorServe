@@ -30,18 +30,18 @@ public class VolunteerEventService
         return volunteerEventDao.selectAllVolunteerEvents();
     }
 
-    public VolunteerEvent getVolunteerEventByPK(String primaryKey)
+    public VolunteerEvent getVolunteerEventByPK(String username, int task_id)
     {
-        return volunteerEventDao.selectVolunteerEvent(primaryKey);
+        return volunteerEventDao.selectVolunteerEvent(username, task_id);
     }
 
-    public int deleteVolunteerEvent(String primaryKey)
+    public int deleteVolunteerEvent(String username, int task_id)
     {
-        return volunteerEventDao.deleteVolunteerEvent(primaryKey);
+        return volunteerEventDao.deleteVolunteerEvent(username, task_id);
     }
 
-    public int updateVolunteerEvent(String primaryKey, Date volunteerEvent)
+    public int updateVolunteerEvent(String username, int task_id, Date date)
     {
-        return volunteerEventDao.updateVolunteerEvent(primaryKey, volunteerEvent);
+        return volunteerEventDao.updateVolunteerEvent(username, task_id, date);
     }
 }

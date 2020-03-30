@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.TaskRequestDao;
 import seniorServe.seniorServe.model.TaskLocationRequest;
 import seniorServe.seniorServe.model.TaskRequest;
+import seniorServe.seniorServe.model.UserRatingHoursDate;
 
 import java.util.List;
 
@@ -40,6 +41,10 @@ public class TaskRequestService {
 
     public List<TaskLocationRequest> getAllRequestedTasksByUsername(String username) {
         return taskRequestDao.getAllRequestTaskLocationByUsername(username);
+    }
+
+    public List<UserRatingHoursDate> getAllUserRatingsForRequestsOfSeniorTask(int task_id) {
+        return taskRequestDao.getAllTaskRequestObjBySeniorTaskID(task_id);
     }
 
     public List<TaskLocationRequest> getAllRequestedTasks() {

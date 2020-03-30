@@ -87,4 +87,9 @@ public class UserController
     public int isVolunteer(@PathVariable("user") String username) {
         return userService.isVolunteer(username);
     }
+
+    @GetMapping(path = "/volunteerAllSenior")
+    public List<User> getVolunteerVolunteeredForAllSenior() {
+        return userService.getVolunteerVolunteeredForAllSeniors();
+    }
 }

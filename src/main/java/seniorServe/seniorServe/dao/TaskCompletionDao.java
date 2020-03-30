@@ -1,12 +1,15 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.TaskCompletion;
+import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
 
 import java.util.List;
 
 public interface TaskCompletionDao {
     public int addTaskCompletion(TaskCompletion taskCompletion);
+
+    public int addTaskCompletionRecord(TaskCompletionRecord taskCompletionRecord);
 
     public int deleteTaskCompletionByTask(int task_ID);
 

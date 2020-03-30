@@ -11,9 +11,9 @@ public interface VolunteerEventDao
 
     List<VolunteerEvent> selectAllVolunteerEvents();
 
-    VolunteerEvent selectVolunteerEvent(String primaryKey);
+    VolunteerEvent selectVolunteerEvent(String username, int task_id);
 
-    int deleteVolunteerEvent(String primaryKey);
+    int deleteVolunteerEvent(String username, int task_id);
 
-    int updateVolunteerEvent(String primaryKey, Date date);
+    int updateVolunteerEvent(String username, int task_id, Date date);
 }

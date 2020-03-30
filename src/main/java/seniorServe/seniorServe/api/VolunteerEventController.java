@@ -21,9 +21,8 @@ public class VolunteerEventController
     }
 
     @PostMapping
-    public void addVolunteerEvent(@RequestBody VolunteerEvent volunteerEvent)
-    {
-        volunteerEventService.addVolunteerEvent(volunteerEvent);
+    public int addVolunteerEvent(@RequestBody VolunteerEvent volunteerEvent) {
+        return volunteerEventService.addVolunteerEvent(volunteerEvent);
     }
 
     @GetMapping
@@ -33,18 +32,18 @@ public class VolunteerEventController
     }
 
     // primaryKey to be delimited by &
-    // {username}&{task_ID)
-    @GetMapping(path = "{primaryKey}")
-    public VolunteerEvent getVolunteerEventByPK(@PathVariable("primaryKey") String primaryKey)
+    // {username}&{task_ID}
+    @GetMapping(path = "{username}&{task_ID}")
+    public VolunteerEvent getVolunteerEventByPK(@PathVariable("username") String username, @PathVariable("task_ID") int task_id)
     {
-        return volunteerEventService.getVolunteerEventByPK(primaryKey);
+        return volunteerEventService.getVolunteerEventByPK(username, task_id);
     }
 
     // primaryKey to be delimited by &
     // {username}&{task_ID)
-    @DeleteMapping
-    public int deleteVolunteerEvent(@PathVariable("primaryKey") String primaryKey)
+    @DeleteMapping(path = "{username}&{task_ID}")
+    public int deleteVolunteerEvent(@PathVariable("username") String username, @PathVariable("task_ID") int task_id)
     {
-        return volunteerEventService.deleteVolunteerEvent(primaryKey);
+        return volunteerEventService.deleteVolunteerEvent(username, task_id);
     }
 }

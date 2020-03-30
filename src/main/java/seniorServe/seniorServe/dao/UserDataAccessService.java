@@ -154,4 +154,20 @@ public class UserDataAccessService implements UserDao
                 "SELECT * FROM Volunteer, Users u WHERE Volunteer.username = u.username";
         return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
     }
+
+    /**
+     * This is the division example.
+     * @return All volunteers than have volunteered for all seniors
+     */
+    @Override
+    public List<User> getVolunteersThatVolunteeredForAllSeniors() {
+        String query =
+                "SELECT u.username, u.first_name, u.last_name, u.postalcode, u.address FROM Volunteer v, Users u " +
+                " WHERE v.username = u.username AND NOT EXISTS" +
+                " ((SELECT username FROM Senior) " +
+                " EXCEPT " +
+                " (SELECT t.username FROM VolunteerVolunteers vv, Task t " +
+                " WHERE vv.task_id = t.task_id AND vv.username = v.username))";
+        return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.TaskCompletionDao;
 import seniorServe.seniorServe.model.TaskCompletion;
+import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
 
 import java.util.List;
@@ -20,6 +21,10 @@ public class TaskCompletionService {
 
     public int createTaskCompletion(TaskCompletion taskCompletion) {
         return taskCompletionDao.addTaskCompletion(taskCompletion);
+    }
+
+    public int createTaskCompletionRecord(TaskCompletionRecord tcr) {
+        return taskCompletionDao.addTaskCompletionRecord(tcr);
     }
 
     public int deleteTaskCompletionByTaskID(int task_ID) {

@@ -108,7 +108,20 @@ public class CustomRowMapper {
                 rs.getInt("totalHours"));
     }
 
+    public static UserRatingHoursDate UserRatingHoursDateRowMapper(ResultSet rs, int i) throws SQLException {
+        return new UserRatingHoursDate(rs.getString("username"),
+                rs.getDouble("rating"),
+                rs.getInt("totalHours"),
+                rs.getDate("recentDate"));
+    }
+
     public static String SeniorVolunteerRowMapper(ResultSet rs, int i) throws SQLException {
         return rs.getString("username");
+    }
+
+    public static VolunteerEvent VolunteerEventRowMapper(ResultSet rs, int i) throws SQLException {
+        return new VolunteerEvent(rs.getString("username"),
+                rs.getInt("task_id"),
+                rs.getDate("date"));
     }
 }

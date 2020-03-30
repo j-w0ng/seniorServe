@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.TaskLocationRequest;
 import seniorServe.seniorServe.model.TaskRequest;
+import seniorServe.seniorServe.model.UserRatingHoursDate;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -121,4 +122,21 @@ public class TaskRequestDataAccessService implements TaskRequestDao {
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRequestRowMapper);
     }
 
+    /**
+     * Returns all the users who have requested the task_id. Returns the username, average rating,
+     * and total number of hours volunteered
+     * @param task_id
+     * @return
+     */
+    @Override
+    public List<UserRatingHoursDate> getAllTaskRequestObjBySeniorTaskID(int task_id) {
+        String sqlQuery =
+                "SELECT v.username as username, max(tr.date) as recentDate, Rating, TotalHours " +
+                        " FROM VolunteerPlaceRequest v, TaskRequestPlace tr, Task t, UserRatingHours urh " +
+                        " WHERE v.Request_ID = tr.Request_ID AND tr.task_id = t.task_id AND urh.username = v.username" +
+                        " AND t.task_id = " + task_id +
+                        " GROUP BY v.username, Rating, TotalHours" +
+                        " ORDER BY recentDate DESC;";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingHoursDateRowMapper);
+    }
 }

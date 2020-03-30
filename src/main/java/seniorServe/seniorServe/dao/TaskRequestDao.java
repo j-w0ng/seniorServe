@@ -2,6 +2,7 @@ package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.TaskLocationRequest;
 import seniorServe.seniorServe.model.TaskRequest;
+import seniorServe.seniorServe.model.UserRatingHoursDate;
 
 import java.util.List;
 
@@ -18,7 +19,10 @@ public interface TaskRequestDao {
 
     public List<TaskRequest> getAllTaskRequestObjByUsername(String username);
 
+    public List<UserRatingHoursDate> getAllTaskRequestObjBySeniorTaskID(int task_id);
+
     public List<TaskLocationRequest> getAllRequestedTasks();
 
     public List<TaskLocationRequest> getAllRequestTaskLocationByUsername(String username);
+
 }
