@@ -19,6 +19,8 @@ public interface TaskDao {
 
     List<TaskLocation> selectTaskByUsername(String username, String order);
 
+    List<TaskLocation> selectTaskByUsernameNoCompletedTask(String username);
+
     List<Task> selectTaskByUsernameOrdered(String username, String order);
 
     List<TaskLocation> selectTaskByFilter(String filterConditions, String order);
