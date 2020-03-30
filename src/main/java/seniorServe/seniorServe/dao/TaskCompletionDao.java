@@ -3,6 +3,7 @@ package seniorServe.seniorServe.dao;
 import seniorServe.seniorServe.model.TaskCompletion;
 import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
+import seniorServe.seniorServe.model.TaskLocationCompletion;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface TaskCompletionDao {
     public List<TaskLocation> getAllCompletedTasks();
 
     public List<TaskLocation> getAllCompletedTaskLocationByUsername(String username);
+
+    public List<TaskLocationCompletion> getAllCompletedTaskLocationRequestByUsername(String username);
 }

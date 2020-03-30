@@ -7,6 +7,7 @@ import seniorServe.seniorServe.dao.TaskCompletionDao;
 import seniorServe.seniorServe.model.TaskCompletion;
 import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
+import seniorServe.seniorServe.model.TaskLocationCompletion;
 
 import java.util.List;
 
@@ -50,5 +51,9 @@ public class TaskCompletionService {
 
     public List<TaskCompletion> getAllTaskCompletionObjByUsername(String username) {
         return taskCompletionDao.getAllTaskCompletionObjByUsername(username);
+    }
+
+    public List<TaskLocationCompletion> getAllCompletedTaskLocationRequestByUsername(String username) {
+        return taskCompletionDao.getAllCompletedTaskLocationRequestByUsername(username);
     }
 }

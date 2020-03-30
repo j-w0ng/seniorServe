@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.TaskCompletion;
 import seniorServe.seniorServe.model.TaskCompletionRecord;
 import seniorServe.seniorServe.model.TaskLocation;
+import seniorServe.seniorServe.model.TaskLocationCompletion;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -120,7 +121,7 @@ public class TaskCompletionDataAccessService implements TaskCompletionDao {
     @Override
     public List<TaskLocation> getAllCompletedTaskLocationByUsername(String username) {
         String sqlQuery =
-                " SELECT t.Task_ID, tc.Date, t.Description, t.Num_Volunteer, t.PostalCode, t.Status, t.Address, " +
+                " SELECT t.Task_ID, t.Date, t.Description, t.Num_Volunteer, t.PostalCode, t.Status, t.Address, " +
                         "s.Username, t.CreateTime, City, Province  " +
                 " FROM SeniorPlaceCompleteTask s, TaskCompletePlaced tc, Task t, PostalCode pc " +
                 " WHERE s.Complete_ID = tc.Complete_ID AND s.Username = '" + username + "'" +
@@ -131,11 +132,22 @@ public class TaskCompletionDataAccessService implements TaskCompletionDao {
     @Override
     public List<TaskLocation> getAllCompletedTasks() {
         String sqlQuery =
-                " SELECT t.Task_ID, tc.Date, t.Description, t.Num_Volunteer, t.PostalCode, t.Status, t.Address, " +
+                " SELECT t.Task_ID, t.Date, t.Description, t.Num_Volunteer, t.PostalCode, t.Status, t.Address, " +
                         "s.Username, t.CreateTime, City, Province  " +
                         " FROM SeniorPlaceCompleteTask s, TaskCompletePlaced tc, Task t, PostalCode pc " +
                         " WHERE s.Complete_ID = tc.Complete_ID " +
                         " AND pc.PostalCode = t.PostalCode AND tc.task_id = t.task_id";
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRowMapper);
+    }
+
+    @Override
+    public List<TaskLocationCompletion> getAllCompletedTaskLocationRequestByUsername(String username) {
+        String sqlQuery =
+                " SELECT t.Task_ID, t.Date, t.Description, t.Num_Volunteer, t.PostalCode, t.Status, t.Address, " +
+                        "s.Username, t.CreateTime, City, Province, tc.Date as CompletionDate  " +
+                        " FROM SeniorPlaceCompleteTask s, TaskCompletePlaced tc, Task t, PostalCode pc " +
+                        " WHERE s.Complete_ID = tc.Complete_ID AND s.Username = '" + username + "'" +
+                        " AND pc.PostalCode = t.PostalCode AND tc.task_id = t.task_id";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationCompletionRowMapper);
     }
 }

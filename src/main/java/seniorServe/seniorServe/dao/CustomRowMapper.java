@@ -46,6 +46,22 @@ public class CustomRowMapper {
                 rs.getString("Province"),
                 rs.getDate("RequestDate"));
     }
+
+    public static TaskLocationCompletion TaskLocationCompletionRowMapper(ResultSet rs, int i) throws SQLException {
+        return new TaskLocationCompletion(rs.getInt("Task_ID"),
+                rs.getDate("Date"),
+                rs.getString("Description"),
+                rs.getInt("Num_Volunteer"),
+                rs.getString("Status"),
+                rs.getString("PostalCode"),
+                rs.getString("Address"),
+                rs.getString("Username"),
+                rs.getDate("CreateTime"),
+                rs.getString("City"),
+                rs.getString("Province"),
+                rs.getDate("CompletionDate"));
+    }
+
     public static Review ReviewRowMapper(ResultSet rs, int i) throws SQLException {
         return new Review(rs.getInt("Review_ID"),
                 rs.getString("Description"),

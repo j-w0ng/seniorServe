@@ -36,20 +36,41 @@ public class ReviewController
     }
 
     @GetMapping(path = "{reviewID}")
-    public Review getReviewByReviewID(@PathVariable("reviewID") int reviewID)
-    {
+    public Review getReviewByReviewID(@PathVariable("reviewID") int reviewID) {
         return reviewService.getReviewByReviewID(reviewID);
     }
 
+    /**
+     * Gets all reviews related to the given task_ID
+     *
+     * Example output
+     * [
+     *     {
+     *         "reviewID": 10,
+     *         "description": "Great Help! My lawn looks amazing!",
+     *         "rating": 10,
+     *         "taskID": 1,
+     *         "volunteerUserName": "Ann34"
+     *     }
+     * ]
+     * @param taskID
+     * @return
+     */
     @GetMapping(path = "/task_ID={TaskID}")
     public List<Review> getReviewByTaskID(@PathVariable("TaskID") int taskID) {
         return reviewService.getReviewByTaskID(taskID);
     }
 
+    /**
+     * Returns the list of reviews written by given username
+     * @param VUsername
+     * @return
+     */
     @GetMapping(path = "/volunteer={VUsername}")
     public List<Review> getReviewByUsername(@PathVariable("VUsername") String VUsername) {
         return reviewService.getReviewsByVolunteer(VUsername);
     }
+
 
     @GetMapping(path = "/averageRating/task_ID={TaskID}")
     public double getAverageRatingByTaskID(@PathVariable("TaskID") int taskID) {
@@ -61,11 +82,24 @@ public class ReviewController
         return reviewService.getAverageRatingByVolunteer(VUsername);
     }
 
-    @GetMapping(path = "/distinctUsers")
+    /**
+     * Gets all volunteers who have at least one review.
+     *
+     * If you want to get all volunteers, use Volunteer endpoint
+     * @return
+     */
+    @GetMapping(path = "/distinctUsersWithReviews")
     public List<String> getDistinctUsers() {
         return reviewService.getDistinctUsersInReview();
     }
 
+    /**
+     * Get all volunteer ratings for those with ratings.
+     *
+     * For a complete VolunteerHours and VolunteerRatings for each Volunteer, please consult
+     *  "api/v1/volunteerRecord/allUserRatingHours"
+     * @return
+     */
     @GetMapping(path = "/allAverageRating")
     public List<UserRating> getAverageRatings() {
         return reviewService.getAllAverageRatings();
@@ -78,8 +112,7 @@ public class ReviewController
     }
 
     @PutMapping(path = "{reviewID}")
-    public void updateReview(@PathVariable("reviewID") int reviewID, @Valid @NonNull @RequestBody Review review)
-    {
+    public void updateReview(@PathVariable("reviewID") int reviewID, @Valid @NonNull @RequestBody Review review) {
         reviewService.updateReview(reviewID, review);
     }
 }

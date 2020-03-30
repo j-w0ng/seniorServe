@@ -21,9 +21,17 @@ public class LocationController {
         this.locationService = locationService;
     }
 
+    /**
+     * Inserts Location (PostalCode, Address, City, Province) into the database. If the combination of
+     * (PostalCode, Address) already exists, return 0. Else return number of inserts made
+     *
+     * @param location
+     * @return returns the number of lines inserted (1 if only Location, 2 if added Location and PostalCode)
+     *
+     */
     @PostMapping
-    public void addLocation(@Valid @NotNull @RequestBody Location location) {
-        locationService.insertLocation(location);
+    public int addLocation(@Valid @NotNull @RequestBody Location location) {
+        return locationService.insertLocation(location);
     }
 
     @GetMapping(path = "getAllLocations")
