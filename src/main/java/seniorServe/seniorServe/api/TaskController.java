@@ -42,9 +42,14 @@ public class TaskController {
         return taskService.getTaskByUsername(username, "");
     }
 
+    @GetMapping(path = "/incompleteTasks/username={username}")
+    public List<TaskLocation> getTaskByUsernameNoCompletedTask(@PathVariable("username") String username) {
+        return taskService.getTaskByUsernameNoCompletedTask(username);
+    }
+
     @GetMapping(path = "username={username}/{orderConditions}")
-    public List<Task> getTaskByUsernameNoOrder(@PathVariable("username") String username,
-                                               @PathVariable("orderConditions") String orders) {
+    public List<Task> getTaskByUsernameOrder(@PathVariable("username") String username,
+                                             @PathVariable("orderConditions") String orders) {
         return taskService.getTaskByUsernameOrdered(username, orders);
     }
 

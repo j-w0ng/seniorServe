@@ -153,6 +153,16 @@ public class TaskDataAccessService implements TaskDao {
     }
 
     @Override
+    public List<TaskLocation> selectTaskByUsernameNoCompletedTask(String username) {
+        String sqlQuery =
+                "SELECT Task.Task_ID, Date, Description, Num_Volunteer, Task.PostalCode, Status, Address, Username, CreateTime, City, Province " +
+                        "FROM PostalCode, Task " +
+                        "WHERE PostalCode.PostalCode = Task.PostalCode AND Username =" + addSingleQuotes(username) +
+                        "AND Task.Task_ID NOT IN (SELECT tcp.task_id FROM TaskCompletePlaced tcp)";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::TaskLocationRowMapper);
+    }
+
+    @Override
     public List<Task> selectTaskByUsernameOrdered(String username, String order) {
         String sqlQuery =
                 "SELECT Task_ID, Date, Description, Num_Volunteer, PostalCode, Status, Address, Username, CreateTime " +

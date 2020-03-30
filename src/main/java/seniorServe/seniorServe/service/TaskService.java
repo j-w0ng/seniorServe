@@ -39,6 +39,10 @@ public class TaskService {
         return taskDao.selectTaskByUsernameOrdered(username, order);
     }
 
+    public List<TaskLocation> getTaskByUsernameNoCompletedTask(String username) {
+        return taskDao.selectTaskByUsernameNoCompletedTask(username);
+    }
+
     public List<TaskLocation> getTaskByFilter(String filterConditions, String order) {
         return taskDao.selectTaskByFilter(filterConditions, order);
     }
