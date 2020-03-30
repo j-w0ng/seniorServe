@@ -47,16 +47,31 @@ public class VolunteerRecordController {
         return volunteerRecordService.getAllVolunteerRecord();
     }
 
+    /**
+     *
+     * @param username
+     * @return the total number of hours volunteered by given username. If no records exist, return 0
+     */
     @GetMapping(path = "/totalHours/username={user}")
     public int getTotalHoursByUser(@PathVariable("user") String username) {
         return volunteerRecordService.getTotalHoursByUsername(username);
     }
 
+    /**
+     *
+     * @param username
+     * @return Gets all the volunteer records for the given username (Sorted by date descending, timeOfDay desc)
+     */
     @GetMapping(path = "/records/username={user}")
     public List<VolunteerTimeEntryRecord> getAllVolunteerRecordsByUser(@PathVariable("user") String username) {
         return volunteerRecordService.getAllVolunteerRecordByUser(username);
     }
 
+    /**
+     * @return A list of {Username, Rating, Hours} for each user (Limit 5).
+     * If there are no ratings, Rating = -1
+     * If there are no volunteerRecords, Hours = 0
+     */
     @GetMapping(path = "/allUserRatingHours")
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         return volunteerRecordService.getRatingHoursForAllUsers();

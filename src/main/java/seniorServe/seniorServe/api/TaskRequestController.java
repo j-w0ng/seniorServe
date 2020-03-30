@@ -48,20 +48,29 @@ public class TaskRequestController {
     }
 
     /**
-     * Gets all the users that requested to volunteer for given task_id
      * @param task_id
-     * @return
+     * @return the users, rating, and hours that requested to volunteer for given task_id
+     * If rating = -1, There are no ratings for that user
+     * If totalHours = 0, There are no volunteer records for that user
      */
     @GetMapping(path = "allRequestUser/task_id={id}")
     public List<UserRatingHoursDate> getAllUserRatingsRequestSeniorTaskID(@PathVariable("id") int task_id) {
         return taskRequestService.getAllUserRatingsForRequestsOfSeniorTask(task_id);
     }
 
+    /**
+     * @return Returns a list of unique Task objects that been requested to volunteer for
+     */
     @GetMapping(path = "allTask")
     public List<TaskLocationRequest> getAllRequestedTask() {
         return taskRequestService.getAllRequestedTasks();
     }
 
+    /**
+     *
+     * @param username
+     * @return  Returns a list of all Task objects where {username} has requested to volunteer for.
+     */
     @GetMapping(path = "allTask/username={username}")
     public List<TaskLocationRequest> getAllRequestedTasksByUsername(@PathVariable("username") String username) {
         return taskRequestService.getAllRequestedTasksByUsername(username);

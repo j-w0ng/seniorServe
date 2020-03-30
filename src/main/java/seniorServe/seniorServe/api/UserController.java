@@ -88,6 +88,9 @@ public class UserController
         return userService.isVolunteer(username);
     }
 
+    /**
+     * @return All volunteers who have volunteered for all seniors (by username)
+     */
     @GetMapping(path = "/volunteerAllSenior")
     public List<User> getVolunteerVolunteeredForAllSenior() {
         return userService.getVolunteerVolunteeredForAllSeniors();

@@ -71,6 +71,9 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
                 "SELECT to_char(SUM(Hours),'999999') FROM VolunteersTimeEntryRecord WHERE Username = '" + username +"'";
         try {
             Object result = jdbcTemplate.queryForObject(sqlQuery, Integer.class);
+            if (result == null) {
+                return 0;
+            }
             return (int) result;
         } catch (IncorrectResultSizeDataAccessException e) {
             return 0;
@@ -88,11 +91,7 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     @Override
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         String sqlQuery =
-                "SELECT m.VUsername as Username, to_char(AVG (rating),'99D99') as Rating, " +
-                        " to_char(SUM(Hours),'999999') as totalHours" +
-                " FROM MakeReview m, VolunteersTimeEntryRecord v WHERE v.Username = m.VUsername " +
-                " GROUP BY m.VUsername " +
-                " ORDER BY Rating DESC, totalHours DESC LIMIT 5;";
+                "SELECT * FROM userRatingHours ORDER BY rating DESC, totalHours DESC limit 5";
 
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingHoursRowMapper);
     }
