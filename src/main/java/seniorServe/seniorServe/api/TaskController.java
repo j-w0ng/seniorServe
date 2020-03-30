@@ -48,8 +48,8 @@ public class TaskController {
     }
 
     @GetMapping(path = "username={username}/{orderConditions}")
-    public List<Task> getTaskByUsernameNoOrder(@PathVariable("username") String username,
-                                               @PathVariable("orderConditions") String orders) {
+    public List<Task> getTaskByUsernameOrder(@PathVariable("username") String username,
+                                             @PathVariable("orderConditions") String orders) {
         return taskService.getTaskByUsernameOrdered(username, orders);
     }
 
