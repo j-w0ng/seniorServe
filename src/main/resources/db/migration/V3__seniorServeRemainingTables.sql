@@ -120,24 +120,25 @@ VALUES
 ('Greg8', 5, '2018-05-17');
 
 CREATE TABLE VolunteersTimeEntryRecord (
+    Record_ID   INTEGER,
 	Date		Date,
 	TimeOfDay	Time,
     Hours		INTEGER,
 	Username	VARCHAR(20),
 	Task_ID	    INTEGER,
-	PRIMARY KEY (Date, TimeOfDay, Username, Task_ID),
+	PRIMARY KEY (Record_ID),
 	FOREIGN KEY (Username) REFERENCES Volunteer
 		On delete Cascade,
 	FOREIGN KEY (Task_ID) REFERENCES Task
 		On delete Cascade);
 
-INSERT INTO VolunteersTimeEntryRecord (Date, TimeOfDay, Hours, Username, Task_ID)
+INSERT INTO VolunteersTimeEntryRecord (Record_ID, Date, TimeOfDay, Hours, Username, Task_ID)
 VALUES
-('2020-01-31', '13:15', 3, 'Ann34', 1),
-('2019-12-31', '14:50', 2, 'Jonny55', 2),
-('2018-09-09', '9:30', 3, 'Ali67', 3),
-('2018-07-17', '12:30', 2, 'Dh78', 4),
-('2018-05-17', '14:23', 4, 'Greg8', 5);
+(123,'2020-01-31', '13:15', 3, 'Ann34', 1),
+(234,'2019-12-31', '14:50', 2, 'Jonny55', 2),
+(456,'2018-09-09', '9:30', 3, 'Ali67', 3),
+(567,'2018-07-17', '12:30', 2, 'Dh78', 4),
+(678,'2018-05-17', '14:23', 4, 'Greg8', 5);
 
 CREATE TABLE TaskRequestPlace (
 	Request_ID 		INTEGER,
