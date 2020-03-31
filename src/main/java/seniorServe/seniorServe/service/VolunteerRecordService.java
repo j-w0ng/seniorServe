@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.VolunteerRecordDao;
 import seniorServe.seniorServe.model.UserRatingHours;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
+import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class VolunteerRecordService {
         return volunteerRecordDao.getSumHoursByUser(username);
     }
 
-    public List<VolunteerTimeEntryRecord> getAllVolunteerRecordByUser(String username) {
+    public List<VolunteerTimeEntryRecordTaskInfo> getAllVolunteerRecordByUser(String username) {
         return volunteerRecordDao.getVolunteerRecordByUser(username);
     }
 

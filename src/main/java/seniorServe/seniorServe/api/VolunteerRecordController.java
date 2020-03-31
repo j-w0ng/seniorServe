@@ -5,6 +5,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.UserRatingHours;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
+import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 import seniorServe.seniorServe.service.VolunteerRecordService;
 
 import javax.validation.Valid;
@@ -63,7 +64,7 @@ public class VolunteerRecordController {
      * @return Gets all the volunteer records for the given username (Sorted by date descending, timeOfDay desc)
      */
     @GetMapping(path = "/records/username={user}")
-    public List<VolunteerTimeEntryRecord> getAllVolunteerRecordsByUser(@PathVariable("user") String username) {
+    public List<VolunteerTimeEntryRecordTaskInfo> getAllVolunteerRecordsByUser(@PathVariable("user") String username) {
         return volunteerRecordService.getAllVolunteerRecordByUser(username);
     }
 

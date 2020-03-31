@@ -2,6 +2,7 @@ package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.UserRatingHours;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
+import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface VolunteerRecordDao {
 
     int getSumHoursByUser(String username);
 
-    List<VolunteerTimeEntryRecord> getVolunteerRecordByUser(String username);
+    List<VolunteerTimeEntryRecordTaskInfo> getVolunteerRecordByUser(String username);
 
     List<VolunteerTimeEntryRecord> getAllVolunteerRecords();
 

@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.UserRatingHours;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
+import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -81,11 +82,12 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     }
 
     @Override
-    public List<VolunteerTimeEntryRecord> getVolunteerRecordByUser(String username) {
+    public List<VolunteerTimeEntryRecordTaskInfo> getVolunteerRecordByUser(String username) {
         String sqlQuery =
-                " SELECT r.record_ID, r.Date, r.TimeOfDay, r.Hours, r.Username, r.Task_ID FROM VolunteersTimeEntryRecord r " +
-                " WHERE r.Username = '" + username + "' ORDER BY r.Date DESC, r.TimeOfDay DESC";
-        return jdbcTemplate.query(sqlQuery, CustomRowMapper::VolunteerRecordRowMapper);
+                " SELECT r.record_ID, r.Date, r.TimeOfDay, r.Hours, r.Username, r.Task_ID, t.Description, t.Username as senior" +
+                " FROM VolunteersTimeEntryRecord r, Task t" +
+                " WHERE r.Task_ID = t.Task_ID AND r.Username = '" + username + "' ORDER BY r.Date DESC, r.TimeOfDay DESC";
+        return jdbcTemplate.query(sqlQuery, CustomRowMapper::VolunteerRecordRowMapperTaskInfo);
     }
 
     @Override
