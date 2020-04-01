@@ -2,6 +2,7 @@ package seniorServe.seniorServe.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import seniorServe.seniorServe.model.TaskLocation;
 import seniorServe.seniorServe.model.VolunteerEvent;
 import seniorServe.seniorServe.service.VolunteerEventService;
 
@@ -37,6 +38,12 @@ public class VolunteerEventController
     public VolunteerEvent getVolunteerEventByPK(@PathVariable("username") String username, @PathVariable("task_ID") int task_id)
     {
         return volunteerEventService.getVolunteerEventByPK(username, task_id);
+    }
+
+    @GetMapping(path = "acceptedTasks/username={username}")
+    public List<TaskLocation> getAcceptedVolunteerTasks(@PathVariable("username") String username)
+    {
+        return volunteerEventService.getAllAcceptedTasks(username);
     }
 
     // primaryKey to be delimited by &

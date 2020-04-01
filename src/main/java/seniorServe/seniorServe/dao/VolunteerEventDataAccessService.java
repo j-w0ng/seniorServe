@@ -2,6 +2,7 @@ package seniorServe.seniorServe.dao;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import seniorServe.seniorServe.model.TaskLocation;
 import seniorServe.seniorServe.model.VolunteerEvent;
 
 import java.util.Arrays;
@@ -57,5 +58,14 @@ public class VolunteerEventDataAccessService implements VolunteerEventDao
     @Override
     public int updateVolunteerEvent(String username, int task_id, Date date) {
         return 0;
+    }
+
+    @Override
+    public List<TaskLocation> getAllAcceptedTasks(String username) {
+        String query =  "SELECT Task.Task_ID, Task.Date, Description, Num_Volunteer, Task.PostalCode, Status, Address, Task.Username, CreateTime, City, Province " +
+                        "FROM PostalCode, Task, VolunteerVolunteers vv " +
+                        "WHERE PostalCode.PostalCode = Task.PostalCode AND Task.Task_ID = vv.Task_ID AND vv.username ='" + username + "' " +
+                        "ORDER BY Task.Date";
+        return jdbcTemplate.query(query, CustomRowMapper::TaskLocationRowMapper);
     }
 }

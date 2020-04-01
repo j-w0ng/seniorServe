@@ -1,5 +1,6 @@
 package seniorServe.seniorServe.dao;
 
+import seniorServe.seniorServe.model.TaskLocation;
 import seniorServe.seniorServe.model.VolunteerEvent;
 
 import java.util.Date;
@@ -16,4 +17,6 @@ public interface VolunteerEventDao
     int deleteVolunteerEvent(String username, int task_id);
 
     int updateVolunteerEvent(String username, int task_id, Date date);
+
+    List<TaskLocation> getAllAcceptedTasks(String username);
 }
