@@ -19,7 +19,7 @@ public class LocationDataAccessService implements LocationDao {
     @Override
     public int insertLocation(Location l) {
         String postalCodeInsertQuery =
-                "INSERT INTO PostalCode VALUES ('" + l.getPostalCode() + "', '" + l.getCity() + "', '" + l.getProvince() +"') " +
+                "INSERT INTO PostalCode VALUES ('" + l.getPostalCode() + "', '" + addDoubleQuery(l.getCity()) + "', '" + l.getProvince() +"') " +
                         "ON CONFLICT (PostalCode) DO NOTHING;";
 
         String locationInsert =
