@@ -101,7 +101,7 @@ public class ReviewDataAccessService implements ReviewDao
         String sqlQuery = "SELECT to_char(AVG (rating),'99D99')" +
                 " FROM MakeReview " +
                 " WHERE Task_ID = " + taskID +
-                " GROUP BY VUsername ";
+                " GROUP BY Task_ID ";
         try {
             Object result = jdbcTemplate.queryForObject(sqlQuery, Double.class);
             return (double) result;
