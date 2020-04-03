@@ -44,6 +44,11 @@ public class VolunteerRecordService {
         return volunteerRecordDao.getVolunteerRecordByUser(username);
     }
 
+    public List<String> getAllProjectedVolunteerRecordsByUser(String username, String projectionProp)
+    {
+        return volunteerRecordDao.getAllProjectedVolunteerRecordsByUser(username, projectionProp);
+    }
+
     public List<VolunteerTimeEntryRecord> getAllVolunteerRecord() {
         return volunteerRecordDao.getAllVolunteerRecords();
     }

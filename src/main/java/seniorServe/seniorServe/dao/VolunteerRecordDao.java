@@ -19,6 +19,8 @@ public interface VolunteerRecordDao {
 
     List<VolunteerTimeEntryRecordTaskInfo> getVolunteerRecordByUser(String username);
 
+    List<String> getAllProjectedVolunteerRecordsByUser(String username, String projectionProp);
+
     List<VolunteerTimeEntryRecord> getAllVolunteerRecords();
 
     List<UserRatingHours> getRatingHoursForAllUsers();

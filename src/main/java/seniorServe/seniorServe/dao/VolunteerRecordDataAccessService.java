@@ -91,6 +91,34 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     }
 
     @Override
+    public List<String> getAllProjectedVolunteerRecordsByUser(String username, String projectionProp) {
+        String querySelection;
+        switch (projectionProp)
+        {
+            case "date":
+                querySelection = "r.date";
+                break;
+            case "description":
+                querySelection = "t.Description";
+                break;
+            case "hours":
+                querySelection = "r.Hours";
+                break;
+            case "senior":
+                querySelection = "t.Username";
+                break;
+            default:
+                querySelection = "r.record_ID, r.Date, r.TimeOfDay, r.Hours, r.Username, r.Task_ID, t.Description, t.Username as senior";
+        }
+
+        String query =  " SELECT " + querySelection + " as property " +
+                        " FROM VolunteersTimeEntryRecord r, Task t" +
+                        " WHERE r.Task_ID = t.Task_ID AND r.Username = '" + username + "' ORDER BY r.Date DESC, r.TimeOfDay DESC";
+        return jdbcTemplate.query(query,  (resultSet, i) ->
+                resultSet.getString("property"));
+    }
+
+    @Override
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         String sqlQuery =
                 "SELECT * FROM userRatingHours ORDER BY rating DESC, totalHours DESC limit 5";

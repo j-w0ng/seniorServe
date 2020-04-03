@@ -69,6 +69,16 @@ public class VolunteerRecordController {
     }
 
     /**
+     * Projection requirement, returns list of strings chosen to be projected
+     */
+    @GetMapping(path = "/records/username={user}/projection={projection}")
+    public List<String> getAllProjectedVolunteerRecordsByUser(@PathVariable("user") String username,
+                                                              @PathVariable("projection") String projectionProp)
+    {
+        return volunteerRecordService.getAllProjectedVolunteerRecordsByUser(username, projectionProp);
+    }
+
+    /**
      * @return A list of {Username, Rating, Hours} for each user (Limit 5).
      * If there are no ratings, Rating = -1
      * If there are no volunteerRecords, Hours = 0
