@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,15 +42,19 @@ public class UserDataAccessService implements UserDao
     }
 
     @Override
-    public User selectUserByUsername(String username)
+    public UserWithLocation selectUserByUsername(String username)
     {
-        String query = "SELECT * FROM users WHERE username = '" + username + "';";
+        String query =  "SELECT * " +
+                        "FROM users u, postalcode pc " +
+                        "WHERE username = '" + username + "' AND u.postalcode = pc.postalcode;";
         try {
             return jdbcTemplate.queryForObject(query, new Object[]{}, (resultSet, i) ->
-                    new User(resultSet.getString("Username"),
+                    new UserWithLocation(resultSet.getString("Username"),
                             resultSet.getString("First_Name"),
                             resultSet.getString("Last_Name"),
                             resultSet.getString("PostalCode"),
+                            resultSet.getString("Address"),
+                            resultSet.getString("Province"),
                             resultSet.getString("Address")));
         }
         catch (EmptyResultDataAccessException e)

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserWithLocation;
 import seniorServe.seniorServe.service.UserService;
 
 import javax.validation.Valid;
@@ -33,7 +34,7 @@ public class UserController
     }
 
     @GetMapping(path = "{username}")
-    public User getUserByUsername(@PathVariable("username") String username) {
+    public UserWithLocation getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUsername(username);
     }
 

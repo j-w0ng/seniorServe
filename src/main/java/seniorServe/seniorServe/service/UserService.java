@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.UserDao;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class UserService
         return userDao.selectAllUsers();
     }
 
-    public User getUserByUsername(String username)
+    public UserWithLocation getUserByUsername(String username)
     {
         return userDao.selectUserByUsername(username);
     }

@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface UserDao
 
     List<User> selectAllUsers();
 
-    User selectUserByUsername(String username);
+    UserWithLocation selectUserByUsername(String username);
 
     int deleteUser(String username);
 
