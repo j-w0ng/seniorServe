@@ -87,6 +87,12 @@ public class ReviewController
         return reviewService.getAverageRatingByTaskID(taskID);
     }
 
+    @GetMapping(path = "/averageRating/senior={SUser}")
+    public double getAverageRatingBySUsername(@PathVariable("SUser") String SUsername)
+    {
+        return reviewService.getAverageRatingBySenior(SUsername);
+    }
+
     @GetMapping(path = "/averageRating/volunteer={VUser}")
     public double getAverageRatingByVUsername(@PathVariable("VUser") String VUsername) {
         return reviewService.getAverageRatingByVolunteer(VUsername);

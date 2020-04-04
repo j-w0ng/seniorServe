@@ -120,6 +120,20 @@ public class ReviewDataAccessService implements ReviewDao
     }
 
     @Override
+    public double getAverageRatingBySenior(String SUsername) {
+        String sqlQuery = "SELECT to_char(AVG (rating),'99D99')" +
+                " FROM MakeReview mk, Task t " +
+                " WHERE mk.Task_ID = t.task_ID AND t.Username = '" + SUsername + "'" +
+                " GROUP BY mk.Task_ID ";
+        try {
+            Object result = jdbcTemplate.queryForObject(sqlQuery, Double.class);
+            return (double) result;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return -1;
+        }
+    }
+
+    @Override
     public double getAverageRatingByVolunteer(String VUsername) {
         String sqlQuery = "SELECT to_char(AVG (rating),'99D99')" +
                 " FROM MakeReview " +

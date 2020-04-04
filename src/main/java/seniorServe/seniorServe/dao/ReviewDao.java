@@ -25,6 +25,8 @@ public interface ReviewDao
 
     double getAverageRatingByTaskID(int taskID);
 
+    double getAverageRatingBySenior(String SUsername);
+
     double getAverageRatingByVolunteer(String VUsername);
 
     int deleteReview(int reviewID);

@@ -56,6 +56,11 @@ public class ReviewService
         return reviewDao.getAverageRatingByTaskID(taskID);
     }
 
+    public double getAverageRatingBySenior(String SUsername)
+    {
+        return reviewDao.getAverageRatingBySenior(SUsername);
+    }
+
     public double getAverageRatingByVolunteer(String VUsername) {
         return reviewDao.getAverageRatingByVolunteer(VUsername);
     }
