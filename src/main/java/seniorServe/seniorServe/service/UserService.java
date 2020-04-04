@@ -72,6 +72,11 @@ public class UserService
         return userDao.selectSenior();
     }
 
+    public List<String> selectSeniorUsername()
+    {
+        return userDao.selectSeniorUsername();
+    }
+
     public List<User> selectVolunteer() {
         return userDao.selectVolunteer();
     }

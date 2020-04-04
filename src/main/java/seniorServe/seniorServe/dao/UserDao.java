@@ -32,6 +32,8 @@ public interface UserDao
 
     List<User> selectSenior();
 
+    List<String> selectSeniorUsername();
+
     List<User> selectVolunteer();
 
     List<User> getVolunteersThatVolunteeredForAllSeniors();

@@ -54,6 +54,11 @@ public class UserController
         return userService.selectSenior();
     }
 
+    @GetMapping(path = "/seniorUsername")
+    public List<String> getSeniorUsernames() {
+        return userService.selectSeniorUsername();
+    }
+
     @DeleteMapping(path = "/senior/username={user}")
     public int deleteSenior(@PathVariable("user") String username) {
         return userService.deleteSenior(username);

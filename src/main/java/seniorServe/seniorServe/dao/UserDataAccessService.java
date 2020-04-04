@@ -154,6 +154,13 @@ public class UserDataAccessService implements UserDao
     }
 
     @Override
+    public List<String> selectSeniorUsername() {
+        String query = "SELECT username FROM Senior";
+        return jdbcTemplate.query(query, (resultSet, i) ->
+                resultSet.getString("username"));
+    }
+
+    @Override
     public List<User> selectVolunteer() {
         String query =
                 "SELECT * FROM Volunteer, Users u WHERE Volunteer.username = u.username";
