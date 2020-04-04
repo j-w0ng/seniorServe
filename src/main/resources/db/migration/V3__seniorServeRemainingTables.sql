@@ -87,7 +87,8 @@ CREATE TABLE TasksHasPreference (
     Pref_ID	INTEGER,
     PRIMARY KEY (Task_ID, Pref_ID),
     FOREIGN KEY (Pref_ID) REFERENCES Preference,
-    FOREIGN KEY (Task_ID) REFERENCES Task);
+    FOREIGN KEY (Task_ID) REFERENCES Task
+        on delete cascade);
 
 INSERT INTO TasksHasPreference (Task_ID, Pref_ID)
 VALUES
@@ -109,7 +110,8 @@ CREATE TABLE VolunteerVolunteers (
 	Date		Date,
 	PRIMARY KEY (Username, Task_ID),
 	FOREIGN KEY (Username) REFERENCES Volunteer,
-    FOREIGN KEY (Task_ID) REFERENCES Task);
+    FOREIGN KEY (Task_ID) REFERENCES Task
+        on delete cascade);
 
 INSERT INTO  VolunteerVolunteers (Username, Task_ID, Date)
 VALUES
@@ -150,11 +152,6 @@ CREATE TABLE TaskRequestPlace (
 
 INSERT INTO TaskRequestPlace (Request_ID, Date, Task_ID)
 VALUES
-(1, '2019-12-31', 1),
-(2, '2018-11-30', 2),
-(3, '2018-08-09', 3),
-(4, '2018-06-17', 4),
-(5, '2018-04-17', 5),
 (6, '2018-06-17', 6);
 
 CREATE TABLE VolunteerPlaceRequest (
@@ -168,11 +165,6 @@ CREATE TABLE VolunteerPlaceRequest (
 
 INSERT INTO VolunteerPlaceRequest (Request_ID, Username)
 VALUES
-(1, 'Ann34'),
-(2, 'Jonny55'),
-(3, 'Ali67'),
-(4, 'Dh78'),
-(5, 'Greg8'),
 (6, 'Greg8');
 
 CREATE TABLE TaskCompletePlaced (
