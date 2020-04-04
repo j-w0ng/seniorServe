@@ -17,6 +17,8 @@ public interface ReviewDao
 
     List<Review> selectReviewsByVolunteer(String VUsername);
 
+    List<Review> selectReviewsBySenior(String SUsername);
+
     List<UserRating> getAllAverageReviews();
 
     List<String> getAllUsers();

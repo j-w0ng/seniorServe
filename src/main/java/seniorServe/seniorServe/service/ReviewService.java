@@ -44,6 +44,10 @@ public class ReviewService
         return reviewDao.selectReviewsByVolunteer(VUsername);
     }
 
+    public List<Review> getReviewsBySenior(String SUsername) {
+        return reviewDao.selectReviewsBySenior(SUsername);
+    }
+
     public List<UserRating> getAllAverageRatings() {
         return reviewDao.getAllAverageReviews();
     }

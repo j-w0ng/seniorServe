@@ -62,13 +62,23 @@ public class ReviewController
     }
 
     /**
-     * Returns the list of reviews written by given username
+     * Returns the list of reviews written ABOUT given username
      * @param VUsername
      * @return
      */
     @GetMapping(path = "/volunteer={VUsername}")
-    public List<Review> getReviewByUsername(@PathVariable("VUsername") String VUsername) {
+    public List<Review> getReviewByVUsername(@PathVariable("VUsername") String VUsername) {
         return reviewService.getReviewsByVolunteer(VUsername);
+    }
+
+    /**
+     * Returns the list of reviews written BY given username
+     * @param SUsername
+     * @return
+     */
+    @GetMapping(path = "/senior={SUsername}")
+    public List<Review> getReviewBySUsername(@PathVariable("SUsername") String SUsername) {
+        return reviewService.getReviewsBySenior(SUsername);
     }
 
 
