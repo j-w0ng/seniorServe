@@ -55,7 +55,7 @@ public class UserDataAccessService implements UserDao
                             resultSet.getString("PostalCode"),
                             resultSet.getString("Address"),
                             resultSet.getString("Province"),
-                            resultSet.getString("Address")));
+                            resultSet.getString("City")));
         }
         catch (EmptyResultDataAccessException e)
         {
