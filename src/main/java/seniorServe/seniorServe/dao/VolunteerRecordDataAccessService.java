@@ -121,7 +121,7 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     @Override
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         String sqlQuery =
-                "SELECT * FROM userRatingHours ORDER BY rating DESC, totalHours DESC limit 5";
+                "SELECT * FROM userRatingHours ORDER BY totalHours DESC, rating DESC limit 5";
 
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::UserRatingHoursRowMapper);
     }
