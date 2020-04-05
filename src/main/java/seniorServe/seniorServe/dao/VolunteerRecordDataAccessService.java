@@ -19,7 +19,7 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     private final JdbcTemplate jdbcTemplate;
 
     private final List<String> record_attributes = Arrays.asList("date", "timeOfDay", "hours", "username",
-            "task_id", "seniorUsername", "taskDescription");
+            "task_id", "senior", "description");
 
     public VolunteerRecordDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -146,14 +146,50 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
                 list.add(update);
             }
         }
-
+        System.out.println(list);
         return list;
+    }
+
+    public String projectionQueryBuilder(List<String> parsedProjectionList)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(",");
+        if (parsedProjectionList.contains("date")) {
+            sb.append("r.date as date, ");
+        }
+
+        if (parsedProjectionList.contains("timeOfDay")) {
+            sb.append("r.timeOfDay as timeOfDay, ");
+        }
+
+        if (parsedProjectionList.contains("hours")) {
+            sb.append("r.hours as hours, ");
+        }
+
+        if (parsedProjectionList.contains("username")) {
+            sb.append("r.username as username, ");
+        }
+
+        if (parsedProjectionList.contains("task_id")) {
+            sb.append("r.task_id as task_id, ");
+        }
+
+        if (parsedProjectionList.contains("senior")) {
+            sb.append("t.username as senior, ");
+        }
+
+        if (parsedProjectionList.contains("description")) {
+            sb.append("t.description as description, ");
+        }
+        sb.replace(sb.lastIndexOf(","), sb.length(), "");
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 
     @Override
     public List<VolunteerRecordString> getProjection(String username, String projectionList) {
         List<String> projArray = parseProjectionList(projectionList);
-        String query = " SELECT * FROM VolunteersTimeEntryRecord r, Task t" +
+        String query = " SELECT r.record_id " + projectionQueryBuilder(projArray) +  " FROM VolunteersTimeEntryRecord r, Task t" +
                 " WHERE r.Task_ID = t.Task_ID AND r.Username = '" + username + "' ORDER BY r.Date DESC, r.TimeOfDay DESC";
         return jdbcTemplate.query(query,
                 rs -> {
