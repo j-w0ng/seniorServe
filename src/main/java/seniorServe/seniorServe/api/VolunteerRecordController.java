@@ -94,7 +94,7 @@ public class VolunteerRecordController {
      * @param username - username for the tasks
      * @param projections - Should be separated by |
      *                    and be one of the following
-     *                    ["record_ID", "date", "timeOfDay", "hours", "username","task_id", "seniorUsername", "taskDescription"]
+     *                    ["record_ID", "date", "timeOfDay", "hours", "username","task_id", "seniorUsername", "description"]
      *
      * @return Returns all values as strings. Any value not specified in projection has a null value.
      *      e.g. localhost:8080/api/v1/volunteerRecord/records/username=Ann34/record_ID|date|hours

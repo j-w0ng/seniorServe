@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class VolunteerRecordString {
     private String record_ID;
@@ -11,10 +12,16 @@ public class VolunteerRecordString {
     private String username;
     private String task_id;
     private String seniorUsername;
-    private String taskDescription;
+    private String description;
 
-    public VolunteerRecordString(String record_ID, String date, String timeOfDay, String hours, String username,
-                                 String task_id, String seniorUsername, String taskDescription) {
+    public VolunteerRecordString(@JsonProperty("record_ID") String record_ID,
+                                 @JsonProperty("date") String date,
+                                 @JsonProperty("timeOfDay") String timeOfDay,
+                                 @JsonProperty("hours") String hours,
+                                 @JsonProperty("username") String username,
+                                 @JsonProperty("task_id") String task_id,
+                                 @JsonProperty("senior") String seniorUsername,
+                                 @JsonProperty("description") String taskDescription) {
         this.record_ID = record_ID;
         this.date = date;
         this.timeOfDay = timeOfDay;
@@ -22,7 +29,7 @@ public class VolunteerRecordString {
         this.username = username;
         this.task_id = task_id;
         this.seniorUsername = seniorUsername;
-        this.taskDescription = taskDescription;
+        this.description = taskDescription;
     }
 
     public VolunteerRecordString() {
@@ -33,7 +40,7 @@ public class VolunteerRecordString {
         this.username = null;
         this.task_id = null;
         this.seniorUsername = null;
-        this.taskDescription = null;
+        this.description = null;
     }
 
     public String getRecord_ID() {
@@ -93,10 +100,10 @@ public class VolunteerRecordString {
     }
 
     public String getTaskDescription() {
-        return taskDescription;
+        return description;
     }
 
     public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+        this.description = taskDescription;
     }
 }

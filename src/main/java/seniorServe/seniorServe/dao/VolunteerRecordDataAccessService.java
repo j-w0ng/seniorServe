@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     private final JdbcTemplate jdbcTemplate;
 
-    private final List<String> record_attributes = Arrays.asList("record_ID", "date", "timeOfDay", "hours", "username",
+    private final List<String> record_attributes = Arrays.asList("date", "timeOfDay", "hours", "username",
             "task_id", "seniorUsername", "taskDescription");
 
     public VolunteerRecordDataAccessService(JdbcTemplate jdbcTemplate) {
@@ -160,10 +160,7 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
                     List<VolunteerRecordString> listRecord = new ArrayList<>();
                     while (rs.next()) {
                         VolunteerRecordString record = new VolunteerRecordString();
-                        // Populate only if in proj_array
-                        if (projArray.contains("record_ID")) {
-                            record.setRecord_ID(rs.getString("record_ID"));
-                        }
+                        record.setRecord_ID(rs.getString("record_ID"));
 
                         if (projArray.contains("date")) {
                             record.setDate(rs.getString("date"));
