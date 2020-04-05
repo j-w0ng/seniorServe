@@ -2,13 +2,13 @@ package seniorServe.seniorServe.model;
 
 public class UserJoin {
     private final String username1;
-    private final Object atttribute1;
+    private final Object attribute1;
     private final String username2;
     private final Object attribute2;
 
-    public UserJoin(String username1, Object atttribute1, String username2, Object attribute2) {
+    public UserJoin(String username1, Object attribute1, String username2, Object attribute2) {
         this.username1 = username1;
-        this.atttribute1 = atttribute1;
+        this.attribute1 = attribute1;
         this.username2 = username2;
         this.attribute2 = attribute2;
     }
@@ -17,8 +17,8 @@ public class UserJoin {
         return username1;
     }
 
-    public Object getAtttribute1() {
-        return atttribute1;
+    public Object getAttribute1() {
+        return attribute1;
     }
 
     public String getUsername2() {
