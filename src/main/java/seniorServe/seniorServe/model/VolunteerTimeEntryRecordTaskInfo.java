@@ -7,9 +7,8 @@ import java.sql.Time;
 
 public class VolunteerTimeEntryRecordTaskInfo extends VolunteerTimeEntryRecord{
 
-    private final String seniorUsername;
-    private final String taskDescription;
-
+    private String seniorUsername;
+    private String taskDescription;
 
     public VolunteerTimeEntryRecordTaskInfo(@JsonProperty("record_ID") int record_ID,
                                             @JsonProperty("date") Date date,
@@ -25,6 +24,12 @@ public class VolunteerTimeEntryRecordTaskInfo extends VolunteerTimeEntryRecord{
         this.taskDescription = taskDescription;
     }
 
+    public VolunteerTimeEntryRecordTaskInfo() {
+        super();
+        this.seniorUsername = null;
+        this.taskDescription = null;
+    }
+
     public String getSeniorUsername()
     {
         return seniorUsername;
@@ -33,5 +38,13 @@ public class VolunteerTimeEntryRecordTaskInfo extends VolunteerTimeEntryRecord{
     public String getTaskDescription()
     {
         return taskDescription;
+    }
+
+    public void setSeniorUsername(String seniorUsername) {
+        this.seniorUsername = seniorUsername;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
     }
 }

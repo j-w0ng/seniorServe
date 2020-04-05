@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.VolunteerRecordDao;
 import seniorServe.seniorServe.model.UserRatingHours;
+import seniorServe.seniorServe.model.VolunteerRecordString;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
@@ -55,5 +56,9 @@ public class VolunteerRecordService {
 
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         return volunteerRecordDao.getRatingHoursForAllUsers();
+    }
+
+    public List<VolunteerRecordString> getProjectionRecord(String username, String projectionList) {
+        return volunteerRecordDao.getProjection(username, projectionList);
     }
 }

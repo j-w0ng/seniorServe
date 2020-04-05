@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.UserRatingHours;
+import seniorServe.seniorServe.model.VolunteerRecordString;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 import seniorServe.seniorServe.service.VolunteerRecordService;
@@ -86,5 +87,32 @@ public class VolunteerRecordController {
     @GetMapping(path = "/allUserRatingHours")
     public List<UserRatingHours> getRatingHoursForAllUsers() {
         return volunteerRecordService.getRatingHoursForAllUsers();
+    }
+
+    /**
+     *
+     * @param username - username for the tasks
+     * @param projections - Should be separated by |
+     *                    and be one of the following
+     *                    ["record_ID", "date", "timeOfDay", "hours", "username","task_id", "seniorUsername", "taskDescription"]
+     *
+     * @return Returns all values as strings. Any value not specified in projection has a null value.
+     *      e.g. localhost:8080/api/v1/volunteerRecord/records/username=Ann34/record_ID|date|hours
+     *      {
+     *         "record_ID": "123",
+     *         "date": "2020-01-31",
+     *         "timeOfDay": null,
+     *         "hours": "3",
+     *         "username": null,
+     *         "task_id": null,
+     *         "seniorUsername": null,
+     *         "taskDescription": null
+     *     }
+     *
+     */
+    @GetMapping(path = "/records/username={username}/{projections}")
+    public List<VolunteerRecordString> getProjections(@PathVariable("username") String username,
+                                                      @PathVariable("projections") String projections) {
+        return volunteerRecordService.getProjectionRecord(username, projections);
     }
 }

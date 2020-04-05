@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.UserRatingHours;
+import seniorServe.seniorServe.model.VolunteerRecordString;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
@@ -24,4 +25,6 @@ public interface VolunteerRecordDao {
     List<VolunteerTimeEntryRecord> getAllVolunteerRecords();
 
     List<UserRatingHours> getRatingHoursForAllUsers();
+
+    List<VolunteerRecordString> getProjection(String username, String projectionList);
 }

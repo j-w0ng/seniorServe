@@ -4,9 +4,11 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.UserRatingHours;
+import seniorServe.seniorServe.model.VolunteerRecordString;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecord;
 import seniorServe.seniorServe.model.VolunteerTimeEntryRecordTaskInfo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,6 +18,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
     private final JdbcTemplate jdbcTemplate;
 
+    private final List<String> record_attributes = Arrays.asList("record_ID", "date", "timeOfDay", "hours", "username",
+            "task_id", "seniorUsername", "taskDescription");
 
     public VolunteerRecordDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -132,4 +136,66 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
                 "SELECT * FROM VolunteersTimeEntryRecord ORDER BY Username";
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::VolunteerRecordRowMapper);
     }
+
+    public List<String> parseProjectionList(String projectionList) {
+        List<String> list = new ArrayList<>();
+        String[] updates = projectionList.split("\\|");
+
+        for (String update : updates) {
+            if (record_attributes.contains(update)) {
+                list.add(update);
+            }
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<VolunteerRecordString> getProjection(String username, String projectionList) {
+        List<String> projArray = parseProjectionList(projectionList);
+        String query = " SELECT * FROM VolunteersTimeEntryRecord r, Task t" +
+                " WHERE r.Task_ID = t.Task_ID AND r.Username = '" + username + "' ORDER BY r.Date DESC, r.TimeOfDay DESC";
+        return jdbcTemplate.query(query,
+                rs -> {
+                    List<VolunteerRecordString> listRecord = new ArrayList<>();
+                    while (rs.next()) {
+                        VolunteerRecordString record = new VolunteerRecordString();
+                        // Populate only if in proj_array
+                        if (projArray.contains("record_ID")) {
+                            record.setRecord_ID(rs.getString("record_ID"));
+                        }
+
+                        if (projArray.contains("date")) {
+                            record.setDate(rs.getString("date"));
+                        }
+
+                        if (projArray.contains("timeOfDay")) {
+                            record.setTimeOfDay(rs.getString("timeOfDay"));
+                        }
+
+                        if (projArray.contains("hours")) {
+                            record.setHours(rs.getString("hours"));
+                        }
+
+                        if (projArray.contains("username")) {
+                            record.setUsername(rs.getString("username"));
+                        }
+
+                        if (projArray.contains("task_id")) {
+                            record.setTask_id(rs.getString("task_id"));
+                        }
+
+                        if (projArray.contains("senior")) {
+                            record.setSeniorUsername(rs.getString("senior"));
+                        }
+
+                        if (projArray.contains("description")) {
+                            record.setTaskDescription(rs.getString("description"));
+                        }
+                        listRecord.add(record);
+                    }
+                    return listRecord;
+                });
+    }
+
 }

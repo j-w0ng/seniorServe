@@ -7,14 +7,14 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class VolunteerTimeEntryRecord {
-    private final int record_ID;
+    private int record_ID;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private final Date date;
+    private Date date;
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-    private final Time timeOfDay;
-    private final int hours;
-    private final String username;
-    private final int task_id;
+    private Time timeOfDay;
+    private int hours;
+    private String username;
+    private int task_id;
 
     public VolunteerTimeEntryRecord(
             @JsonProperty("record_ID") int record_ID,
@@ -31,8 +31,22 @@ public class VolunteerTimeEntryRecord {
         this.task_id = task_id;
     }
 
+    public VolunteerTimeEntryRecord() {
+        this.record_ID = -1;
+        this.date = null;
+        this.timeOfDay = null;
+        this.hours = -1;
+        this.username = null;
+        this.task_id = -1;
+    }
+
     public int getRecord_ID() {
         return record_ID;
+    }
+
+
+    public Date getDate() {
+        return date;
     }
 
     public Time getTimeOfDay() {
@@ -51,7 +65,27 @@ public class VolunteerTimeEntryRecord {
         return task_id;
     }
 
-    public Date getDate() {
-        return date;
+    public void setRecord_ID(int record_ID) {
+        this.record_ID = record_ID;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTimeOfDay(Time timeOfDay) {
+        this.timeOfDay = timeOfDay;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setTask_id(int task_id) {
+        this.task_id = task_id;
     }
 }
