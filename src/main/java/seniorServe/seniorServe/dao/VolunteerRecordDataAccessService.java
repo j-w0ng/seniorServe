@@ -137,7 +137,7 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
         return jdbcTemplate.query(sqlQuery, CustomRowMapper::VolunteerRecordRowMapper);
     }
 
-    public List<String> parseProjectionList(String projectionList) {
+    private List<String> parseProjectionList(String projectionList) {
         List<String> list = new ArrayList<>();
         String[] updates = projectionList.split("\\|");
 
@@ -146,11 +146,10 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
                 list.add(update);
             }
         }
-        System.out.println(list);
         return list;
     }
 
-    public String projectionQueryBuilder(List<String> parsedProjectionList)
+    private String projectionQueryBuilder(List<String> parsedProjectionList)
     {
         StringBuilder sb = new StringBuilder();
         sb.append(",");
@@ -182,7 +181,6 @@ public class VolunteerRecordDataAccessService implements VolunteerRecordDao {
             sb.append("t.description as description, ");
         }
         sb.replace(sb.lastIndexOf(","), sb.length(), "");
-        System.out.println(sb.toString());
         return sb.toString();
     }
 
