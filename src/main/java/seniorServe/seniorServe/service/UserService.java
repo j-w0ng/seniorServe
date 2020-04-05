@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import seniorServe.seniorServe.dao.UserDao;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserJoin;
 import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.List;
@@ -91,5 +92,9 @@ public class UserService
 
     public List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks() {
         return userDao.getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
+    }
+
+    public List<UserJoin> getUserJoins(String attribute, String symbol) {
+        return userDao.getUserJoins(attribute, symbol);
     }
 }

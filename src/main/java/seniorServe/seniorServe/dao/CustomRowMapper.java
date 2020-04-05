@@ -152,4 +152,11 @@ public class CustomRowMapper {
                 rs.getInt("task_id"),
                 rs.getDate("date"));
     }
+
+    public static UserJoin UserJoinRowMapper(ResultSet rs, int i) throws SQLException {
+        return new UserJoin(rs.getString("username1"),
+                rs.getObject("attribute1"),
+                rs.getString("username2"),
+                rs.getObject("attribute2"));
+    }
 }

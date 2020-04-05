@@ -1,6 +1,7 @@
 package seniorServe.seniorServe.dao;
 
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserJoin;
 import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public interface UserDao
     List<User> getVolunteersThatHaveVolunteeredForAllPreferences();
 
     List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
+
+    List<UserJoin> getUserJoins(String conditionAttribute, String symbol);
 }

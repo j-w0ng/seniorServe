@@ -17,4 +17,9 @@ WHERE username NOT IN (SELECT DISTINCT VUsername FROM MakeReview)));
 
 CREATE VIEW UserRatingHours AS
 SELECT UserHours.username, Rating, TotalHours
-FROM UserHours JOIN UserRating ON UserHours.username = UserRating.username
+FROM UserHours JOIN UserRating ON UserHours.username = UserRating.username;
+
+CREATE VIEW UserFull AS
+SELECT u.Username, u.First_name, u.Last_Name, u.PostalCode, u.Address, pc.City, pc.Province, urh.Rating, urh.TotalHours
+FROM Users u, PostalCode pc, UserRatingHours urh
+WHERE u.username = urh.username AND pc.postalcode = u.postalcode;

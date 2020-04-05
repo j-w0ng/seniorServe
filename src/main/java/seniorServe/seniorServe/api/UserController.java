@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserJoin;
 import seniorServe.seniorServe.model.UserWithLocation;
 import seniorServe.seniorServe.service.UserService;
 
@@ -110,5 +111,16 @@ public class UserController
     @GetMapping(path = "/volunteerAllReviewTask")
     public List<User> getVolunteerAllReview() {
         return userService.getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
+    }
+
+    /**
+     *
+     * @param attribute - one of : ['first_name', 'last_name', 'postalcode', 'address', 'city', 'province', 'rating', 'totalhours'
+     * @param symbol - one of : [ '>', '<', '=' ,'<>']
+     * @return
+     */
+    @GetMapping(path = "/userJoin/{attribute}&{symbol}")
+    public List<UserJoin> getUserJoin(@PathVariable("attribute") String attribute, @PathVariable("symbol") String symbol) {
+        return userService.getUserJoins(attribute, symbol);
     }
 }

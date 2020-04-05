@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import seniorServe.seniorServe.model.User;
+import seniorServe.seniorServe.model.UserJoin;
 import seniorServe.seniorServe.model.UserWithLocation;
 
 import java.util.Arrays;
@@ -183,6 +184,10 @@ public class UserDataAccessService implements UserDao
         return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
     }
 
+    /**
+     * Another division - Get the volunteers that have volunteered for tasks that cover ALL preferences in database
+     * @return
+     */
     @Override
     public List<User> getVolunteersThatHaveVolunteeredForAllPreferences() {
         String query =
@@ -195,6 +200,11 @@ public class UserDataAccessService implements UserDao
         return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
     }
 
+    /**
+     * Another division - Get the volunteers that have reviews on all the completed tasks they have volunteered for.
+     * (Note: This does not count tasks that have not been completed, but accepted volunteer request)
+     * @return
+     */
     @Override
     public List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks() {
         String query =
@@ -206,5 +216,17 @@ public class UserDataAccessService implements UserDao
                         " (SELECT DISTINCT mr.task_id FROM MakeReview mr " +
                         " WHERE v.username = mr.vusername))";
         return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
+
+    @Override
+    public List<UserJoin> getUserJoins(String conditionAttribute, String symbol) {
+        String condition1 = " u1." + conditionAttribute + " ";
+        String condition2 = " u2." + conditionAttribute + " ";
+        String query =
+                "SELECT u1.username as username1, " + condition1 + " as attribute1 , u2.username as username2, "
+                        + condition2 + " as attribute2 " +
+                        " FROM UserFull u1 JOIN UserFull u2 ON ("+ condition1 + symbol + condition2 + ")" +
+                        " ORDER BY u1.username, "+ condition2;
+        return jdbcTemplate.query(query, CustomRowMapper::UserJoinRowMapper);
     }
 }
