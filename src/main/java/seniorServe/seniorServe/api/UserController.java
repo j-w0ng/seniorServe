@@ -101,4 +101,14 @@ public class UserController
     public List<User> getVolunteerVolunteeredForAllSenior() {
         return userService.getVolunteerVolunteeredForAllSeniors();
     }
+
+    @GetMapping(path = "/volunteerAllPref")
+    public List<User> getVolunteerAllPref() {
+        return userService.getVolunteersThatHaveVolunteeredForAllPreferences();
+    }
+
+    @GetMapping(path = "/volunteerAllReviewTask")
+    public List<User> getVolunteerAllReview() {
+        return userService.getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
+    }
 }

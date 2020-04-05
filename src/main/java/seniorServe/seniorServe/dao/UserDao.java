@@ -37,4 +37,8 @@ public interface UserDao
     List<User> selectVolunteer();
 
     List<User> getVolunteersThatVolunteeredForAllSeniors();
+
+    List<User> getVolunteersThatHaveVolunteeredForAllPreferences();
+
+    List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
 }

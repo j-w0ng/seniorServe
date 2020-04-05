@@ -84,4 +84,12 @@ public class UserService
     public List<User> getVolunteerVolunteeredForAllSeniors() {
         return userDao.getVolunteersThatVolunteeredForAllSeniors();
     }
+
+    public List<User> getVolunteersThatHaveVolunteeredForAllPreferences() {
+        return userDao.getVolunteersThatHaveVolunteeredForAllPreferences();
+    }
+
+    public List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks() {
+        return userDao.getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks();
+    }
 }

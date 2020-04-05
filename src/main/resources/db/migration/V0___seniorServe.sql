@@ -303,7 +303,7 @@ VALUES
 (45, 'I know how to use facebook now well but they were a bit impatient', 8, 4, 'Dh78'),
 (22, 'Ann did a very bad job. Do not recommend.', 1, 4, 'Ann34'),
 (11, 'My package got shipped, no complaints!', 9, 5, 'Greg8'),
-(29, 'My package got shipped, no complaints!', 9, 5, 'Ann34');
+(29, 'My package got shipped, no complaints great work!', 9, 5, 'Ann34');
 
 
 

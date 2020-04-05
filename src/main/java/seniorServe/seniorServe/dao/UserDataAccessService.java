@@ -182,4 +182,29 @@ public class UserDataAccessService implements UserDao
                 " WHERE vv.task_id = t.task_id AND vv.username = v.username))";
         return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
     }
+
+    @Override
+    public List<User> getVolunteersThatHaveVolunteeredForAllPreferences() {
+        String query =
+                "SELECT u.username, u.first_name, u.last_name, u.postalcode, u.address FROM Volunteer v, Users u " +
+                        " WHERE v.username = u.username AND NOT EXISTS" +
+                        " ((SELECT Pref_ID FROM Preference) " +
+                        " EXCEPT " +
+                        " (SELECT DISTINCT tt.Pref_ID FROM VolunteerVolunteers vv, Task t, TasksHasPreference tt " +
+                        " WHERE vv.task_id = t.task_id AND vv.username = v.username AND tt.task_id = t.task_id))";
+        return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
+
+    @Override
+    public List<User> getVolunteersThatHaveBeenReviewedForAllTheirCompletedTasks() {
+        String query =
+                "SELECT u.username, u.first_name, u.last_name, u.postalcode, u.address FROM Volunteer v, Users u " +
+                        " WHERE v.username = u.username AND NOT EXISTS" +
+                        " ((SELECT DISTINCT vv.task_id FROM VolunteerVolunteers vv, TaskCompletePlaced tc " +
+                        " WHERE vv.username = v.username AND tc.task_id = vv.task_id ) " +
+                        " EXCEPT " +
+                        " (SELECT DISTINCT mr.task_id FROM MakeReview mr " +
+                        " WHERE v.username = mr.vusername))";
+        return jdbcTemplate.query(query, CustomRowMapper::UserRowMapper);
+    }
 }
