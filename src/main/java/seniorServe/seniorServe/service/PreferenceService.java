@@ -19,6 +19,10 @@ public class PreferenceService
         this.preferenceDao = preferenceDao;
     }
 
+    public int addTaskPreference(int task_id, int pref_id) {
+        return preferenceDao.addTaskPreference(task_id, pref_id);
+    }
+
     public List<Preference> getAllPreferences()
     {
         return preferenceDao.selectAllPreferences();

@@ -116,7 +116,7 @@ public class UserController
     /**
      *
      * @param attribute - one of : ['first_name', 'last_name', 'postalcode', 'address', 'city', 'province', 'rating', 'totalhours'
-     * @param symbol - one of : [ '>', '<', '=' ,'<>']
+     * @param symbol - one of : [ '>', '<', '=' ,'<>', '<=', '=>']
      * @return
      */
     @GetMapping(path = "/userJoin/{attribute}&{symbol}")

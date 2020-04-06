@@ -1,10 +1,7 @@
 package seniorServe.seniorServe.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import seniorServe.seniorServe.model.Preference;
 import seniorServe.seniorServe.service.PreferenceService;
 
@@ -21,6 +18,11 @@ public class PreferenceController
     public PreferenceController(PreferenceService preferenceService)
     {
         this.preferenceService = preferenceService;
+    }
+
+    @PostMapping(path = "/taskPref={task_id}&{pref_id}")
+    public int addTaskPreference(@PathVariable("task_id") int task_id, @PathVariable("pref_id") int pref_id) {
+        return preferenceService.addTaskPreference(task_id, pref_id);
     }
 
     @GetMapping

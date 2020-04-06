@@ -159,4 +159,9 @@ public class CustomRowMapper {
                 rs.getString("username2"),
                 rs.getObject("attribute2"));
     }
+
+    public static TaskPreference TaskPrefRowMapper(ResultSet rs, int i) throws SQLException {
+        return new TaskPreference(rs.getInt("task_ID"),
+                rs.getInt("pref_ID"));
+    }
 }

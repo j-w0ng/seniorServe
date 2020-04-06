@@ -17,6 +17,12 @@ public class PreferenceDataAccessService implements PreferenceDao
     }
 
     @Override
+    public int addTaskPreference(int task_id, int pref_id) {
+        String query = "INSERT INTO TasksHasPreference VALUES (" + task_id + "," + pref_id + ")";
+        return jdbcTemplate.update(query);
+    }
+
+    @Override
     public List<Preference> selectAllPreferences() {
         String query = "SELECT * FROM preference;";
         return jdbcTemplate.query(query, (resultSet, i) ->
