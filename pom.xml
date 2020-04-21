@@ -80,7 +80,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>controller.SeniorServeApplication</mainClass>
+                    <mainClass>seniorServe.seniorServe.SeniorServeApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
