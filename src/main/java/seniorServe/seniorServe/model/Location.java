@@ -31,6 +31,7 @@ public class Location {
         return address;
     }
 
+
     public String getCity() {
         return city;
     }
