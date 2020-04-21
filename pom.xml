@@ -12,6 +12,7 @@
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SeniorServe</name>
+    <url>http://maven.apache.org</url>
     <description>helping connect seniors with people to help them</description>
 
     <properties>
