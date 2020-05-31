@@ -1,6 +1,6 @@
 app:
   datasource:
-    jdbc-url: jdbc:postgresql://ec2-54-86-170-8.compute-1.amazonaws.com/d16u2nuhp45or4?sslmode=require
-    username: navuinmwbnchhx
-    password: f423d2d7ba6b695321942391366a55465c7dbbab1b972c08b4fd5ac67e6d8625
+    jdbc-url: jdbc:postgresql://ec2-34-230-231-71.compute-1.amazonaws.com/d2t42jeak1b56g?sslmode=require
+    username: wxzolabyjfdkpd
+    password: 411595b5b59c6f6215202d7ca4d99756c8f5ad2eca2273d1f0229bd019614229
     pool-size: 30
